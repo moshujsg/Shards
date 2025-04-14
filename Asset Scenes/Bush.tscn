@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://xai0x2w26yqo"]
+
+[ext_resource type="PackedScene" uid="uid://by25wjcohdyu6" path="res://Assets/Bush/Bush.glb" id="1_6uuux"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ug88h"]
+radius = 0.771153
+
+[node name="Node3D" type="StaticBody3D"]
+
+[node name="Bush2" parent="." instance=ExtResource("1_6uuux")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ug88h")

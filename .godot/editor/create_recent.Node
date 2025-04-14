@@ -1,0 +1,14 @@
+MeshInstance3D
+Camera3D
+RigidBody3D
+ColorRect
+CanvasLayer
+StaticBody3D
+CollisionShape3D
+Area3D
+Label
+Control
+AnimationTree
+CSGBox3D
+CSGMesh3D
+AnimationPlayer

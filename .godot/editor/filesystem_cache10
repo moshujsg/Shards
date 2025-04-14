@@ -1,0 +1,36 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1744652271
+camera.gd::GDScript/GDScript::8163080265012692537::1744466156::0::1::::<>Camera3D<><>0<>1<><>::
+dummy.gd::GDScript/GDScript::3950598482956952997::1744460855::0::1::::<>Node3D<><>0<>0<><>::
+icon.svg::CompressedTexture2D/CompressedTexture2D::2218073381617154701::1743886927::1743886932::1::::<><><>0<>0<>7f60a263c0eb77c646a97cf51d643ed3<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+main.tscn::PackedScene::2679041106505703876::1744650508::0::1::::<><><>0<>0<><>::uid://neeqd7yonalw::::res://Asset Scenes/TreeLog.tscn<>uid://2myuylmvmhen::::res://Player.tscn<>uid://f5brsjc3k43b::::res://Dummy/Dummy.tscn
+pixelart_stylized.gdshader::Shader::3441725286376709585::1744650770::0::1::::<><><>0<>0<><>::
+Player.tscn::PackedScene::1921365513107104801::1744650508::0::1::::<><><>0<>0<><>::uid://b6kmn7ys0sakr::::res://Scripts/player.gd<>uid://dtb5i5vpvma8n::::res://PlayerStuff/Player_v1.glb<>uid://bsapl0dtxpr02::::res://PlayerStuff/Animations/Animations.glb<>uid://doki0ewnavaov::::res://camera.gd<>uid://bpbgyh18pyum0::::res://pixelart_stylized.gdshader
+TreeLog.blend::PackedScene/PackedScene::5933809214180340938::1743888811::1743894002::1::::<><><>0<>0<>2319a4122740fe993e66900767889344<>res://.godot/imported/TreeLog.blend-cdd3e10442a0d51df7015a29dcdfeb29.scn::uid://c1rvwuvkjgnf3::::res://Materials/TreeLog.tres
+::res://Asset Scenes/::1744073210
+Bush.tscn::PackedScene/PackedScene::1614875035248178614::1744073210::0::1::::<><><>0<>0<><>::uid://by25wjcohdyu6::::res://Assets/Bush/Bush.glb
+TreeLog.tscn::PackedScene/PackedScene::920984127097666260::1744057646::0::1::::<><><>0<>0<><>::uid://cqsm8ai8666re::::res://TreeLog.blend
+::res://Assets/::1744563167
+::res://Assets/Bush/::1744071988
+Bush.glb::PackedScene/PackedScene::4128552404059750639::1744070656::1744070857::1::::<><><>0<>0<>e9c9405784184de3f61c5862a57a7364<>res://.godot/imported/Bush.glb-72a730322f5695115f36d0967c3db2df.scn::uid://ccw6xpubanhf3::::res://Assets/Bush/Vegetacao.tres
+Bush_T_Plants.png::CompressedTexture2D/CompressedTexture2D::6648352772926992476::1744070667::1744071931::1::::<><><>0<>0<>813a4fab8de06512d94e3893bcde613c<>res://.godot/imported/Bush_T_Plants.png-a064f4f95fed582fe0bea578a1e9f5c9.s3tc.ctex::
+Vegetacao.tres::StandardMaterial3D/StandardMaterial3D::4960559484079450090::1744071988::0::1::::<><><>0<>0<><>::uid://c1yrntb0yh1gq::::res://Assets/Bush/Bush_T_Plants.png
+::res://Assets/Tornado/::1744563413
+::res://Dummy/::1744650508
+Dummy.tscn::PackedScene::412967585753363005::1744650508::0::1::::<><><>0<>0<><>::uid://bwjx1rqh0ehwn::::res://dummy.gd
+::res://Materials/::1744649865
+TreeLog.tres::StandardMaterial3D::6634161151482591674::1744649865::0::1::::<><><>0<>0<><>::uid://101urdapuous::::res://textures/T_Plants.png
+::res://PlayerStuff/::1744410106
+PlayerMoviment_SM.tres::AnimationNodeStateMachine/AnimationNodeStateMachine::2318982899820725469::1744410106::0::1::::<><><>0<>0<><>::
+Player_v1.glb::PackedScene/PackedScene::8496751862941675583::1744057792::1744057794::1::::<><><>0<>0<>6e3a63b5f3eeae5843a5aa1484034560<>res://.godot/imported/Player_v1.glb-f2eab15b01a5189671f28c59cf6ce8e8.scn::uid://c142ul7apajud::::res://PlayerStuff/Player_v1_PixelTextureGrid_32.png<>uid://db3fhh2dkr7fw::::res://PlayerStuff/Player_v1_Armo-texture-01.png<>uid://7l6atlm0eif1::::res://PlayerStuff/Player_v1_Texture01.png
+Player_v1_Armo-texture-01.png::CompressedTexture2D/CompressedTexture2D::7287569966875721096::1743950088::1744057794::1::::<><><>0<>0<>8b59f9c843b89defbdb702b078806342<>res://.godot/imported/Player_v1_Armo-texture-01.png-959ee0cf5104b068f670b3bea373218f.s3tc.ctex::
+Player_v1_PixelTextureGrid_32.png::CompressedTexture2D/CompressedTexture2D::6659293958736219071::1743950088::1744057794::1::::<><><>0<>0<>02819a17d4c8ebfac4b3b590b838ad26<>res://.godot/imported/Player_v1_PixelTextureGrid_32.png-a1d25fdf77367cfd0944ffad1c48be7d.s3tc.ctex::
+Player_v1_Texture01.png::CompressedTexture2D/CompressedTexture2D::2270634394002755668::1743950088::1744057794::1::::<><><>0<>0<>b0b44d7b7d86b35bdf51000bbb4df502<>res://.godot/imported/Player_v1_Texture01.png-4158e3ae33682645896ca4e39598f504.s3tc.ctex::
+::res://PlayerStuff/Animations/::1744423219
+Animations.glb::AnimationLibrary/AnimationLibrary::3650751586414920505::1744070186::1744423219::1::::<><><>0<>0<>e78bce8f497c19e185f7858b77c7aeef<>res://.godot/imported/Animations.glb-d2d3d958df9cce657674e9a288591c88.res::uid://b55pui0hvh5cv::::res://PlayerStuff/Animations/AttackSword_01_Saved.res
+AttackSword_01_Saved.res::Animation/Animation::4554964255378793209::1744423219::0::1::::<><><>0<>0<><>::
+::res://Scripts/::1744498376
+player.gd::GDScript/GDScript::4583672151921128389::1744498376::0::1::::<>CharacterBody3D<><>0<>0<><>::
+::res://textures/::1743888821
+PixelTextureGrid_32.png::CompressedTexture2D/CompressedTexture2D::7625020930428014423::1743888815::1743888817::1::::<><><>0<>0<>713e0da73803ec048a08879943f74914<>res://.godot/imported/PixelTextureGrid_32.png-ed4cb51d8e1d3ec0784641ab620a8d62.ctex::
+T_Plants.png::CompressedTexture2D/CompressedTexture2D::1878134633682576066::1743888815::1743888821::1::::<><><>0<>0<>eace1d452abfb075acfe22e1f9b5180d<>res://.godot/imported/T_Plants.png-271ddac649c0593c12b5296e57bf0858.s3tc.ctex::
