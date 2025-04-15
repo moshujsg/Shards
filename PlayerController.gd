@@ -1,7 +1,7 @@
 class_name MainPlayerController extends PlayerController
 
 signal player_jumped
-
+signal attack_triggered
 enum State {
 }
 
@@ -15,13 +15,20 @@ const JUMP_VELOCITY = 4.5
 const MOUSE_SENSITIVITY = 0.010
 const TURN_SPEED = 10
 
+@export_group("Actions")
 @export var ia_move_up: InputAction
 @export var ia_move_down: InputAction
 @export var ia_move_left: InputAction
 @export var ia_move_right: InputAction
 @export var ia_jump: InputAction
-@export var ia_capture_mouse: InputAction
+@export var ia_show_cursor: InputAction
+@export var ia_capture_cursor: InputAction
+@export var ia_attack: InputAction
+
+@export_group("Contexts")
 @export var base_context: InputMappingContext
+@export var visible_cursor_context: InputMappingContext
+@export var combat_context: InputMappingContext
 
 @onready var player : Player = owner
 @onready var camera: Camera3D = $"../Pivot/Camera3D"
@@ -33,20 +40,39 @@ var move_input : Vector2
 func _ready() -> void:
 	#super._ready()
 	push_mapping_context(base_context)
+	push_mapping_context(combat_context)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	# Movement Context
 	bind_action(ia_move_up, InputActionProperties.TriggerPhase.TRIGGERED, on_action)
 	bind_action(ia_move_left, InputActionProperties.TriggerPhase.TRIGGERED, on_action)
 	bind_action(ia_move_right, InputActionProperties.TriggerPhase.TRIGGERED, on_action)
 	bind_action(ia_move_down, InputActionProperties.TriggerPhase.TRIGGERED, on_action)
-	bind_action(ia_capture_mouse, InputActionProperties.TriggerPhase.TRIGGERED, toggle_mouse_capture)
-	bind_action(ia_capture_mouse, InputActionProperties.TriggerPhase.COMPLETED, toggle_mouse_capture)
+	bind_action(ia_show_cursor, InputActionProperties.TriggerPhase.TRIGGERED, show_cursor)
 	bind_action(ia_jump, InputActionProperties.TriggerPhase.TRIGGERED, jump)
 
-func toggle_mouse_capture(p_action: InputObject) -> void:
-	if Input.mouse_mode == Input.MouseMode.MOUSE_MODE_CAPTURED:
-		Input.mouse_mode = Input.MouseMode.MOUSE_MODE_VISIBLE
-	else:
-		Input.mouse_mode = Input.MouseMode.MOUSE_MODE_CAPTURED
+	# Visible Cursor Context
+	bind_action(ia_capture_cursor, InputActionProperties.TriggerPhase.TRIGGERED, capture_cursor)
+	
+	# Action
+	bind_action(ia_attack, InputActionProperties.TriggerPhase.TRIGGERED, attack)
 
+func attack(p_action: InputObject) -> void:
+	attack_triggered.emit()
+
+func capture_cursor(p_action: InputObject) -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	queue_context_for_removal(visible_cursor_context)
+	push_mapping_context(base_context)
+	push_mapping_context(combat_context)
+
+func show_cursor(p_action: InputObject) -> void:
+	Input.mouse_mode = Input.MouseMode.MOUSE_MODE_VISIBLE
+	queue_context_for_removal(base_context)
+	queue_context_for_removal(combat_context)
+	push_mapping_context(visible_cursor_context)
+	pass
+	
 func jump(p_action: InputObject) -> void:
 	if player.is_on_floor():
 		player.velocity.y += JUMP_VELOCITY

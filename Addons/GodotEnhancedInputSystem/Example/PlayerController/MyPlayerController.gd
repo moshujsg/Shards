@@ -37,7 +37,7 @@ func _on_add_context_button_up() -> void:
 
 func _on_remove_context_button_up() -> void:
 	var start_time := Time.get_ticks_usec()
-	remove_mapping_context(extra_context)
+	queue_context_for_removal(extra_context)
 	var end_time := Time.get_ticks_usec()
 	var duration := end_time - start_time
 	print("Extra context removed Execution time: ", duration, " µs (", duration / 1000.0, " ms)")

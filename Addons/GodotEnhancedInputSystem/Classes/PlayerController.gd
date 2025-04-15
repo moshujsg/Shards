@@ -6,6 +6,7 @@ signal on_action_triggered(action : InputAction)
 
 var mapping_contexts : Array[InputMappingContext]
 var ongoing_actions : Array[InputActionContainer] = []
+var context_remove_queue: Array[InputMappingContext]
 
 #func _ready() -> void:
 	#for context in preset_mapping_contexts:
@@ -13,6 +14,9 @@ var ongoing_actions : Array[InputActionContainer] = []
 	
 
 func bind_action(p_action : InputAction, p_event: InputActionProperties.TriggerPhase,  p_function: Callable) -> void:
+	if not p_action:
+		push_error("tried to bind a function to a null action")
+		return
 	p_action.bind_action(p_event, p_function)
 
 func _input(event: InputEvent) -> void:
@@ -50,23 +54,34 @@ func _process(delta: float) -> void:
 		container.update()
 		if not container.is_being_processed():
 			call_deferred("clear_ongoing_action", container)
+	for context in context_remove_queue:
+		_remove_mapping_context(context)
+	context_remove_queue.clear()
 
 func clear_ongoing_action(container: InputActionContainer) -> void:
 	ongoing_actions.erase(container)
+	print("Cleared_action " + container.action.name)
 
 func push_mapping_context(p_mapping_context: InputMappingContext) -> void:
+	if not p_mapping_context:
+		push_error("Tried to push a mapping context but it was null")
+		return
 	p_mapping_context._load_actions()
 	mapping_contexts.push_front(p_mapping_context)
-	# Update stack_index for all contexts
-	for i in range(mapping_contexts.size()):
-		mapping_contexts[i].stack_index = i
 
-func remove_mapping_context(p_mapping_context: InputMappingContext) -> void:
-	var index := p_mapping_context.stack_index
-	if not (index >= 0 and index < mapping_contexts.size()):
+func queue_context_for_removal(p_mapping_context: InputMappingContext) -> void:
+	if p_mapping_context in context_remove_queue:
+		push_warning("Tried to remove context already queued for removal")
 		return
-	mapping_contexts.remove_at(index)
-	
+	context_remove_queue.append(p_mapping_context)
+
+func _remove_mapping_context(p_mapping_context: InputMappingContext) -> void:
+	mapping_contexts.erase(p_mapping_context)
 	# Update stack_index for remaining contexts
-	for i in range(index, mapping_contexts.size()):
-		mapping_contexts[i].stack_index -= 1
+	for action in p_mapping_context.action_containers:
+		action.disconnect_properties()
+	
+	for action in ongoing_actions:
+		if action in p_mapping_context.action_containers:
+			action.reset()
+			call_deferred("clear_ongoing_action", action)

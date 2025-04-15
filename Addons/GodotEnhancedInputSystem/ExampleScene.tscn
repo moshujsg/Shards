@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cwbpwf1llae5x" path="res://Addons/GodotEnhancedInputSystem/Example/PlayerController/MyPlayerController.gd" id="1_imku0"]
 [ext_resource type="Script" uid="uid://dxf7fy688y1i4" path="res://Addons/GodotEnhancedInputSystem/Classes/InputMappingContext.gd" id="2_i5arm"]
 [ext_resource type="Resource" uid="uid://fs1c3t8g02pw" path="res://Prefabs/Resources/InputActions/Jump.tres" id="3_a0tk4"]
-[ext_resource type="Resource" uid="uid://bgpjxaspigjx1" path="res://Addons/GodotEnhancedInputSystem/Example/InputContexts/MovementContext.tres" id="3_wc5p8"]
+[ext_resource type="Resource" uid="uid://bgpjxaspigjx1" path="res://Prefabs/Resources/InputActions/MappingContexts/MovementContext.tres" id="3_wc5p8"]
 [ext_resource type="Resource" uid="uid://bdyv38rsy0ksa" path="res://Addons/GodotEnhancedInputSystem/Example/InputContexts/ExtraContext.tres" id="4_jsk3o"]
 [ext_resource type="Resource" uid="uid://dxnvu58qclbnd" path="res://Prefabs/Resources/InputActions/MoveLeft.tres" id="4_r3fl7"]
 [ext_resource type="Resource" uid="uid://d1im72y63x88v" path="res://Prefabs/Resources/InputActions/MoveUp.tres" id="7_cdqbm"]

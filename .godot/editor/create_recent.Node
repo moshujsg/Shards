@@ -1,3 +1,6 @@
+CollisionShape3D
+Area3D
+Node3D
 AnimationTree
 Node
 MeshInstance3D
@@ -6,9 +9,6 @@ RigidBody3D
 ColorRect
 CanvasLayer
 StaticBody3D
-CollisionShape3D
-Area3D
 Label
 Control
 CSGBox3D
-CSGMesh3D

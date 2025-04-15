@@ -11,6 +11,8 @@ func connect_properties() -> void:
 
 func disconnect_properties() -> void:
 	for property in action_properties:
+		if not property.internal_event_fire.is_connected(_on_internal_event_fired):
+			continue
 		property.internal_event_fire.disconnect(_on_internal_event_fired)
 
 func _on_internal_event_fired(p_object: InputObject) -> void:
@@ -58,3 +60,8 @@ func is_being_processed() -> bool:
 	if ongoing_prop:
 		return true
 	return false
+
+func reset() -> void:
+	if ongoing_prop:
+		ongoing_prop.reset()
+		ongoing_prop = null

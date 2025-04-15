@@ -33,13 +33,13 @@ func _physics_process(delta: float) -> void:
 	#bs_node.set_parameter("blend_amount",lerpf(0, )) 
 	var speed : float = Vector2(velocity.x, velocity.z).length()
 	var normalized_speed := clampf(speed / player_controller.SPEED, 0.0, 1.0)
-	animation_tree["parameters/IdleRunBlend/blend_amount"] = normalized_speed
+	animation_tree["parameters/Movement/IdleRunBlend/blend_amount"] = normalized_speed
 	if velocity.y != 0:
-		animation_tree["parameters/GroundedAir/transition_request"] = "OnAir"
+		animation_tree["parameters/Movement/GroundedAir/transition_request"] = "OnAir"
 		if velocity.y > 0:
-			animation_tree["parameters/JumpFall/transition_request"] = "Jump"
+			animation_tree["parameters/Movement/JumpFall/transition_request"] = "Jump"
 		elif velocity.y < 0:
-			animation_tree["parameters/JumpFall/transition_request"] = "Fall"
+			animation_tree["parameters/Movement/JumpFall/transition_request"] = "Fall"
 	else:
-		animation_tree["parameters/GroundedAir/transition_request"] = "Grounded"
+		animation_tree["parameters/Movement/GroundedAir/transition_request"] = "Grounded"
 	
