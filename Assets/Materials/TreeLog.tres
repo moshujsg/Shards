@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c1rvwuvkjgnf3"]
+
+[ext_resource type="Texture2D" uid="uid://101urdapuous" path="res://Assets/textures/T_Plants.png" id="1_l0irb"]
+
+[resource]
+resource_name = "TreeLog"
+albedo_texture = ExtResource("1_l0irb")
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("1_l0irb")
+texture_filter = 0

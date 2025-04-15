@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="InputAction" load_steps=2 format=3 uid="uid://b8i8mb41d8u15"]
+
+[ext_resource type="Script" uid="uid://b0b5cfu7c7dan" path="res://Addons/GodotEnhancedInputSystem/Classes/InputAction.gd" id="1_sw1xj"]
+
+[resource]
+script = ExtResource("1_sw1xj")
+name = "CaptureMouse"
+description = ""
+metadata/_custom_type_script = "uid://b0b5cfu7c7dan"

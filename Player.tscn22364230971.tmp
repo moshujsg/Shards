@@ -1,0 +1,166 @@
+[gd_scene load_steps=24 format=3 uid="uid://2myuylmvmhen"]
+
+[ext_resource type="Script" uid="uid://b6kmn7ys0sakr" path="res://Scripts/player.gd" id="1_xhfnw"]
+[ext_resource type="PackedScene" uid="uid://dtb5i5vpvma8n" path="res://PlayerStuff/Player_v1.glb" id="2_kpjcp"]
+[ext_resource type="AnimationLibrary" uid="uid://bsapl0dtxpr02" path="res://PlayerStuff/Animations/Animations.glb" id="3_kne1u"]
+[ext_resource type="Script" uid="uid://doki0ewnavaov" path="res://Scripts/camera.gd" id="4_cxr5p"]
+[ext_resource type="Shader" uid="uid://bpbgyh18pyum0" path="res://pixelart_stylized.gdshader" id="5_tdg3f"]
+[ext_resource type="Script" uid="uid://g2lyslguq5h1" path="res://PlayerController.gd" id="6_tdg3f"]
+[ext_resource type="Resource" uid="uid://d1im72y63x88v" path="res://Addons/GodotEnhancedInputSystem/Example/InputActions/MoveUp.tres" id="7_dtqjt"]
+[ext_resource type="Resource" uid="uid://bgpjxaspigjx1" path="res://Addons/GodotEnhancedInputSystem/Example/InputContexts/MovementContext.tres" id="8_5ncpa"]
+[ext_resource type="Resource" uid="uid://dxnvu58qclbnd" path="res://Addons/GodotEnhancedInputSystem/Example/InputActions/MoveLeft.tres" id="8_wi0c6"]
+
+[sub_resource type="Animation" id="Animation_kne1u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Area3D:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e80uo"]
+_data = {
+&"RESET": SubResource("Animation_kne1u")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kne1u"]
+animation = &"Animations/Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cxr5p"]
+animation = &"Animations/Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tdg3f"]
+animation = &"Animations/Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e80uo"]
+animation = &"Animations/AttackSword_01"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_5ncpa"]
+xfade_time = 0.2
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "Jump"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_cxr5p"]
+filter_enabled = true
+filters = ["Root/Skeleton3D:CTRL-Shoulder.L", "Root/Skeleton3D:CTRL-Shoulder.R", "Root/Skeleton3D:DEF-Arm.L", "Root/Skeleton3D:DEF-Arm.R", "Root/Skeleton3D:DEF-ForeArm.L", "Root/Skeleton3D:DEF-ForeArm.R", "Root/Skeleton3D:DEF-Hand.L", "Root/Skeleton3D:DEF-Hand.R", "Root/Skeleton3D:DEF-Head", "Root/Skeleton3D:DEF-Shoulder.L", "Root/Skeleton3D:DEF-Shoulder.R", "Root/Skeleton3D:DEF-Torso", "Root/Skeleton3D:DEF-core", "Root/Skeleton3D:Equip-Handle", "Root/Skeleton3D:IK-Arm.L", "Root/Skeleton3D:IK-Arm.R", "Root/Skeleton3D:IK-Target-Arm.L", "Root/Skeleton3D:IK-Target-Arm.R"]
+fadein_time = 0.05
+fadeout_time = 0.1
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_kne1u"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_e80uo"]
+graph_offset = Vector2(-495.55, 560.391)
+nodes/Anim_Idle/node = SubResource("AnimationNodeAnimation_kne1u")
+nodes/Anim_Idle/position = Vector2(-600, 160)
+nodes/Anim_Jump/node = SubResource("AnimationNodeAnimation_cxr5p")
+nodes/Anim_Jump/position = Vector2(-600, 520)
+nodes/Anim_Run/node = SubResource("AnimationNodeAnimation_tdg3f")
+nodes/Anim_Run/position = Vector2(-600, 340)
+nodes/AttackSword_1/node = SubResource("AnimationNodeAnimation_e80uo")
+nodes/AttackSword_1/position = Vector2(-280, 520)
+nodes/Moviment/node = SubResource("AnimationNodeTransition_5ncpa")
+nodes/Moviment/position = Vector2(-280, 220)
+nodes/SwordAttack/node = SubResource("AnimationNodeOneShot_cxr5p")
+nodes/SwordAttack/position = Vector2(260, 220)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_kne1u")
+nodes/TimeScale/position = Vector2(40, 440)
+nodes/output/position = Vector2(440, 220)
+node_connections = [&"Moviment", 0, &"Anim_Idle", &"Moviment", 1, &"Anim_Run", &"Moviment", 2, &"Anim_Jump", &"SwordAttack", 0, &"Moviment", &"SwordAttack", 1, &"TimeScale", &"TimeScale", 0, &"AttackSword_1", &"output", 0, &"SwordAttack"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kne1u"]
+size = Vector3(1.28455, 0.575684, 1.11621)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xhfnw"]
+radius = 0.262887
+height = 1.00077
+
+[sub_resource type="QuadMesh" id="QuadMesh_dtqjt"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cxr5p"]
+render_priority = 0
+shader = ExtResource("5_tdg3f")
+shader_parameter/shadows_enabled = true
+shader_parameter/highlights_enabled = true
+shader_parameter/shadow_strength = 0.4
+shader_parameter/highlight_strength = 0.1
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_xhfnw")
+
+[node name="Geometry" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.504951, 0)
+
+[node name="Player_v1" parent="Geometry" instance=ExtResource("2_kpjcp")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.501821, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Geometry/Player_v1"]
+libraries = {
+&"": SubResource("AnimationLibrary_e80uo"),
+&"Animations": ExtResource("3_kne1u")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Geometry/Player_v1"]
+tree_root = SubResource("AnimationNodeBlendTree_e80uo")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Moviment/current_state = "Idle"
+parameters/Moviment/transition_request = ""
+parameters/Moviment/current_index = 0
+parameters/SwordAttack/active = false
+parameters/SwordAttack/internal_active = false
+parameters/SwordAttack/request = 0
+parameters/TimeScale/scale = 0.6
+
+[node name="Area3D" type="Area3D" parent="Geometry"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Area3D"]
+transform = Transform3D(0.922086, 0.386985, 0, -0.386985, 0.922086, 0, 0, 0, 1, 0.323188, 0.193192, -0.346861)
+shape = SubResource("BoxShape3D_kne1u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.504951, 0)
+shape = SubResource("CapsuleShape3D_xhfnw")
+
+[node name="Pivot" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0.406783, 1.34029, 0)
+spring_length = 4.0
+
+[node name="Camera3D" type="Camera3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+near = 0.001
+script = ExtResource("4_cxr5p")
+
+[node name="Postprocess" type="MeshInstance3D" parent="Pivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, -0.844)
+visible = false
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_dtqjt")
+surface_material_override/0 = SubResource("ShaderMaterial_cxr5p")
+
+[node name="PlayerController" type="Node" parent="."]
+script = ExtResource("6_tdg3f")
+move_up = ExtResource("7_dtqjt")
+move_left = ExtResource("8_wi0c6")
+base_context = ExtResource("8_5ncpa")
+preset_mapping_contexts = null

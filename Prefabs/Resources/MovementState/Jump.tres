@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RMovementState" load_steps=2 format=3 uid="uid://4hd8qcllk0te"]
+
+[ext_resource type="Script" uid="uid://bqu2wvo2bmrdh" path="res://Scripts/Resources/PlayerState.gd" id="1_c6ewl"]
+
+[resource]
+script = ExtResource("1_c6ewl")
+state = 2
+animation = "Jump"
+metadata/_custom_type_script = "uid://bqu2wvo2bmrdh"
