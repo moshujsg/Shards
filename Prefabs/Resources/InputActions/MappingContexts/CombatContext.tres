@@ -15,7 +15,7 @@ pressed = true
 [sub_resource type="Resource" id="Resource_uirt1"]
 script = ExtResource("3_qw4xs")
 event = SubResource("InputEventMouseButton_rbbhg")
-trigger = 0
+trigger = 3
 value_type = 0
 modifiers = Array[int]([])
 axis_order = 0

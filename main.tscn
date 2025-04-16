@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bef0oepgnwyc7"]
+[gd_scene load_steps=14 format=3 uid="uid://bef0oepgnwyc7"]
 
 [ext_resource type="PackedScene" uid="uid://neeqd7yonalw" path="res://Prefabs/TreeLog.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://2myuylmvmhen" path="res://Prefabs/Player.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://f5brsjc3k43b" path="res://Dummy/Dummy.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://d3tkn72avp4nj" path="res://Prefabs/enemy.tscn" id="4_1bvp3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_top_color = Color(0.414168, 0.717048, 0.875941, 1)
@@ -42,6 +43,13 @@ font_size = 26
 font_color = Color(0.72, 0, 0, 1)
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_1bvp3"]
+script/source = "class_name LABELFPS extends Label
+
+func _process(delta: float) -> void:
+	text = \"FPS: \" + str(Engine.get_frames_per_second())
+"
 
 [node name="Main" type="Node3D"]
 
@@ -124,5 +132,17 @@ offset_right = 48.0
 offset_bottom = 30.0
 label_settings = SubResource("LabelSettings_0xm2m")
 
+[node name="Label" type="Label" parent="HUD"]
+layout_mode = 0
+offset_right = 75.0
+offset_bottom = 43.0
+script = SubResource("GDScript_1bvp3")
+
 [node name="Dummy" parent="." instance=ExtResource("2_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.98684, 0, -4.18099)
+
+[node name="Enemy" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.28563, -5.96046e-08, 0.794425)
+
+[node name="Enemy2" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.28563, -5.96046e-08, 2.32844)

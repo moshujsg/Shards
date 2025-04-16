@@ -60,7 +60,6 @@ func _process(delta: float) -> void:
 
 func clear_ongoing_action(container: InputActionContainer) -> void:
 	ongoing_actions.erase(container)
-	print("Cleared_action " + container.action.name)
 
 func push_mapping_context(p_mapping_context: InputMappingContext) -> void:
 	if not p_mapping_context:

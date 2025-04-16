@@ -1,9 +1,7 @@
 class_name MainPlayerController extends PlayerController
 
 signal player_jumped
-signal attack_triggered
-enum State {
-}
+signal attack_triggered(action: InputAction)
 
 const TILT_ANGLE = 60.0
 const TILT_SPEED = 5.0
@@ -33,7 +31,7 @@ const TURN_SPEED = 10
 @onready var player : Player = owner
 @onready var camera: Camera3D = $"../Pivot/Camera3D"
 @onready var pivot: SpringArm3D = $"../Pivot"
-@onready var mesh: Node3D = $"../Mesh"
+@export var mesh_pivot: Node3D
 
 var move_input : Vector2
 
@@ -55,10 +53,10 @@ func _ready() -> void:
 	bind_action(ia_capture_cursor, InputActionProperties.TriggerPhase.TRIGGERED, capture_cursor)
 	
 	# Action
-	bind_action(ia_attack, InputActionProperties.TriggerPhase.TRIGGERED, attack)
+	bind_action(ia_attack, InputActionProperties.TriggerPhase.TRIGGERED, attack.bind(ia_attack))
 
-func attack(p_action: InputObject) -> void:
-	attack_triggered.emit()
+func attack(p_object: InputObject, p_action: InputAction) -> void:
+	attack_triggered.emit(p_action)
 
 func capture_cursor(p_action: InputObject) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -86,7 +84,6 @@ func _physics_process(delta: float) -> void:
 	player.velocity.z = 0
 	move_input = move_input.normalized()
 	
-	player.movement_state = Player.MovementState.IDLE
 	
 	if move_input != Vector2.ZERO:
 		var camera_basis := camera.global_transform.basis
@@ -99,8 +96,7 @@ func _physics_process(delta: float) -> void:
 		
 		var target_basis := Basis.looking_at(-direction, Vector3.UP)
 
-		mesh.global_basis = mesh.global_basis.slerp(target_basis, delta * TURN_SPEED)
-		player.movement_state = Player.MovementState.RUN
+		mesh_pivot.global_basis = mesh_pivot.global_basis.slerp(target_basis, delta * TURN_SPEED)
 
 		#if not player.is_on_floor():
 			#print(target_basis)
@@ -114,13 +110,11 @@ func _physics_process(delta: float) -> void:
 			#var tilt_basis := target_basis.rotated(target_basis.z, tilt_angle * signf(target_basis.z.y))
 #
 			## Apply smooth tilt (only if airborne)
-			#mesh.global_basis = mesh.global_basis.slerp(tilt_basis, delta * TILT_SPEED)
+			#mesh_pivot.global_basis = mesh_pivot.global_basis.slerp(tilt_basis, delta * TILT_SPEED)
 
 	if not player.is_on_floor():
 		player.velocity.y += player.get_gravity().y * delta
-		player.movement_state = Player.MovementState.JUMP
-
-			#mesh.global_basis = mesh.global_basis.slerp(target_bas, delta * TURN_SPEED)
+			#mesh_pivot.global_basis = mesh_pivot.global_basis.slerp(target_bas, delta * TURN_SPEED)
 
 	player.move_and_slide()
 	move_input.x = 0

@@ -10,7 +10,7 @@ extends Camera3D
 			post_processing = p
 			var a := Vector3(-1, 1, 0).normalized()
 			var b := Vector3(1, 0, 0).normalized()
-			#print("dot: ", a.dot(b))
+			#print("dot: ", a.dot(b)) 
 		else:
 			postprocess.hide()
 			post_processing = p

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RComboAttack" load_steps=3 format=3 uid="uid://cdxllkv0s4hh6"]
+
+[ext_resource type="Resource" uid="uid://dtn1ypsx6wnmd" path="res://Prefabs/ComboAttacks/Light1.tres" id="1_7v07u"]
+[ext_resource type="Script" uid="uid://2kwao4oqmq2a" path="res://Scripts/Resources/ComboAttack.gd" id="1_60r0l"]
+
+[resource]
+script = ExtResource("1_60r0l")
+name = "LightAttack"
+root_attack = ExtResource("1_7v07u")
+metadata/_custom_type_script = "uid://2kwao4oqmq2a"

@@ -23,6 +23,10 @@ gdscript/warnings/unsafe_method_access=2
 gdscript/warnings/unsafe_cast=1
 gdscript/warnings/unsafe_call_argument=2
 
+[display]
+
+window/vsync/vsync_mode=0
+
 [file_customization]
 
 folder_colors={

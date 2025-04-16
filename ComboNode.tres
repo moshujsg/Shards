@@ -1,0 +1,11 @@
+[gd_resource type="AnimationNodeTransition" load_steps=2 format=3 uid="uid://d0gxotfiu34dm"]
+
+[ext_resource type="Script" uid="uid://cywvymn40lrlw" path="res://new_script.gd" id="1_g3hjx"]
+
+[resource]
+input_0/name = "state_0"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+script = ExtResource("1_g3hjx")
+metadata/_custom_type_script = "uid://cywvymn40lrlw"

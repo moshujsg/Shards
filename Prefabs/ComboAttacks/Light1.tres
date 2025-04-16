@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="RComboAttackNode" load_steps=5 format=3 uid="uid://dtn1ypsx6wnmd"]
+
+[ext_resource type="Script" uid="uid://ry2r7owg3mp0" path="res://Scripts/Resources/ComboAttackNode.gd" id="1_ckqy4"]
+[ext_resource type="Animation" uid="uid://bnx4gk7ruismj" path="res://PlayerStuff/Animations/AttackSword_01.res" id="1_fs8gp"]
+[ext_resource type="Resource" uid="uid://tqij44h7k18x" path="res://Prefabs/Resources/InputActions/Attack.tres" id="2_ewpg3"]
+[ext_resource type="Resource" uid="uid://dmyjpsya3wsp1" path="res://Prefabs/ComboAttacks/Light2.tres" id="4_ewpg3"]
+
+[resource]
+script = ExtResource("1_ckqy4")
+input_action = ExtResource("2_ewpg3")
+animation_name = "Player/AttackSword_01"
+animation = ExtResource("1_fs8gp")
+next_attacks = Array[ExtResource("1_ckqy4")]([ExtResource("4_ewpg3")])
+combo_window = 0.5
+damage = 10
+cancelable = false
+metadata/_custom_type_script = "uid://ry2r7owg3mp0"
