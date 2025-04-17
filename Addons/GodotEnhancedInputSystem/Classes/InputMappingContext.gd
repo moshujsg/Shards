@@ -2,7 +2,7 @@ class_name InputMappingContext extends Resource
 
 @export var name : String
 @export var action_containers : Array[InputActionContainer]
-var stack_index : int = 999
+var disabled : bool
 
 func _load_actions() -> void:
 	if name == "":

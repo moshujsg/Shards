@@ -28,6 +28,8 @@ func _input(event: InputEvent) -> void:
 			return
 		var flag := false
 		for mapping_context in mapping_contexts:
+			if mapping_context.disabled:
+				continue
 			for container in mapping_context.action_containers:
 				var action_name := mapping_context.name + "_" + container.action.name
 				if not event.is_action(action_name):

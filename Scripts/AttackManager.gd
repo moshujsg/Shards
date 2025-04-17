@@ -52,7 +52,7 @@ func is_new_combo(p_action: InputAction) -> bool:
 		if next_attack.input_action == p_action:
 			return false
 	return true
-
+var counter := 0
 func _on_attack_triggered(p_action: InputAction) -> void:
 	if animation_tree.is_playing():
 		return
@@ -60,12 +60,14 @@ func _on_attack_triggered(p_action: InputAction) -> void:
 	if not abilities.has(p_action) and (not current_step or current_step.has_next_attack(p_action)):
 		return
 
+	if counter == 2:
+		pass
 	if is_new_combo(p_action):
 		current_step = abilities.get(p_action).root_attack
 	else:
 		current_step = current_step.get_next_attack(p_action)
-
-	animation_tree.play_attack_animation(current_step.animation_name, current_step.animation)
+	counter += 1
+	animation_tree.play_attack_animation(current_step.animation_name)
 	timer.stop()
 	print("Stopped timer")
 	# Clean up the current step if it's last step
