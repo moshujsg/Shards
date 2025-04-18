@@ -1,7 +1,8 @@
-RComboAttackNode
-RComboAttack
+RVFXList
+InputAction
+RComboAbilityNode
+RComboAbility
 Animation
 AnimationNodeStateMachinePlayback
-InputAction
 InputMappingContext
 RMovementState

@@ -1,9 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://bef0oepgnwyc7"]
+[gd_scene load_steps=15 format=3 uid="uid://bef0oepgnwyc7"]
 
 [ext_resource type="PackedScene" uid="uid://neeqd7yonalw" path="res://Prefabs/TreeLog.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bli1shihd2psw" path="res://Scripts/Manager.gd" id="1_lquwl"]
 [ext_resource type="PackedScene" uid="uid://2myuylmvmhen" path="res://Prefabs/Player.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://f5brsjc3k43b" path="res://Dummy/Dummy.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://d3tkn72avp4nj" path="res://Prefabs/enemy.tscn" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://bjvg5g618v8v4" path="res://Assets/crosshair.png" id="4_7mycd"]
+[ext_resource type="Script" uid="uid://cv727qevddc8o" path="res://Scripts/VFXManager.gd" id="5_272bh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_top_color = Color(0.414168, 0.717048, 0.875941, 1)
@@ -28,15 +31,17 @@ fog_density = 0.3999
 fog_depth_curve = 1.51572
 fog_depth_begin = 3.0
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_h2yge"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
-albedo_color = Color(0.275803, 0.301772, 0.217062, 1)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lquwl"]
-data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_7mycd"]
+
+[sub_resource type="GDScript" id="GDScript_lquwl"]
+script/source = "extends CanvasLayer
+
+@export var crosshair : TextureRect
+
+func _ready() -> void:
+	# Center the crosshair
+	crosshair.position = get_viewport().get_visible_rect().size / 2 - crosshair.size / 2
+"
 
 [sub_resource type="LabelSettings" id="LabelSettings_0xm2m"]
 font_size = 26
@@ -52,6 +57,7 @@ func _process(delta: float) -> void:
 "
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_lquwl")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0xm2m")
@@ -63,17 +69,6 @@ shadow_enabled = true
 
 [node name="Map" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0204668, 0, 0.00137806)
-
-[node name="Floor" type="MeshInstance3D" parent="Map"]
-transform = Transform3D(9.58695, 0, 0, 0, 1, 0, 0, 0, 6.94816, 0, 0, 0)
-mesh = SubResource("PlaneMesh_h2yge")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_0xm2m")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Map/Floor"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Floor/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_lquwl")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.982, 0.465063, 0.00852633)
@@ -116,27 +111,51 @@ transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 1.41709, -
 use_collision = true
 size = Vector3(3.22491, 2.20215, 2.43701)
 
-[node name="Player" parent="." instance=ExtResource("2_0xm2m")]
+[node name="CSGBox3D6" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00821685, -0.544651, 0.0119324)
+use_collision = true
+size = Vector3(19.2486, 1, 14.0555)
+
+[node name="Characters" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.120067, 0, 0.257437)
 
-[node name="HUD" type="Control" parent="."]
+[node name="Player" parent="Characters" instance=ExtResource("2_0xm2m")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("crosshair")]
+script = SubResource("GDScript_lquwl")
+crosshair = NodePath("HUD/Crosshair")
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="DebugLabel" type="Label" parent="HUD"]
+[node name="Crosshair" type="TextureRect" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_7mycd")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="DebugLabel" type="Label" parent="CanvasLayer/HUD"]
 layout_direction = 2
 layout_mode = 0
 offset_right = 48.0
 offset_bottom = 30.0
 label_settings = SubResource("LabelSettings_0xm2m")
 
-[node name="Label" type="Label" parent="HUD"]
+[node name="Label" type="Label" parent="CanvasLayer/HUD"]
 layout_mode = 0
 offset_right = 75.0
 offset_bottom = 43.0
 script = SubResource("GDScript_1bvp3")
+
+[node name="AbilityManager" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.28563, -5.96046e-08, 0.794425)
+script = ExtResource("5_272bh")
+raycast_collision_mask = 1
 
 [node name="Dummy" parent="." instance=ExtResource("2_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.98684, 0, -4.18099)

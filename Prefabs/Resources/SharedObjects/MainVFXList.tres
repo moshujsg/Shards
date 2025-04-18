@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="RVFXList" load_steps=2 format=3 uid="uid://dxevoltuo1h8e"]
+
+[ext_resource type="Script" uid="uid://x73nfx35kq2x" path="res://Scripts/Resources/VFXList.gd" id="1_mjv72"]
+
+[resource]
+script = ExtResource("1_mjv72")
+metadata/_custom_type_script = "uid://x73nfx35kq2x"

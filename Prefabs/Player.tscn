@@ -1,12 +1,12 @@
-[gd_scene load_steps=52 format=3 uid="uid://2myuylmvmhen"]
+[gd_scene load_steps=57 format=3 uid="uid://2myuylmvmhen"]
 
 [ext_resource type="Script" uid="uid://b6kmn7ys0sakr" path="res://Scripts/player.gd" id="1_xhfnw"]
 [ext_resource type="PackedScene" uid="uid://dtb5i5vpvma8n" path="res://PlayerStuff/Player_v1.glb" id="2_kpjcp"]
 [ext_resource type="Script" uid="uid://doki0ewnavaov" path="res://Scripts/camera.gd" id="4_cxr5p"]
 [ext_resource type="Shader" uid="uid://bpbgyh18pyum0" path="res://pixelart_stylized.gdshader" id="5_tdg3f"]
-[ext_resource type="Script" uid="uid://g2lyslguq5h1" path="res://PlayerController.gd" id="6_tdg3f"]
+[ext_resource type="Script" uid="uid://g2lyslguq5h1" path="res://Scripts/PlayerController.gd" id="6_tdg3f"]
 [ext_resource type="Resource" uid="uid://d1im72y63x88v" path="res://Prefabs/Resources/InputActions/MoveUp.tres" id="7_dtqjt"]
-[ext_resource type="Script" uid="uid://mwqvmq22h2f7" path="res://Scripts/AttackManager.gd" id="7_fd4tb"]
+[ext_resource type="Script" uid="uid://mwqvmq22h2f7" path="res://Scripts/Components/AttackComponent.gd" id="7_fd4tb"]
 [ext_resource type="Animation" uid="uid://bnx4gk7ruismj" path="res://PlayerStuff/Animations/AttackSword_01.res" id="7_fuy0y"]
 [ext_resource type="Resource" uid="uid://dvuud1kxhl1k1" path="res://Prefabs/Resources/InputActions/MoveDown.tres" id="8_3tkgg"]
 [ext_resource type="Resource" uid="uid://bgpjxaspigjx1" path="res://Prefabs/Resources/InputActions/MappingContexts/MovementContext.tres" id="8_5ncpa"]
@@ -14,20 +14,23 @@
 [ext_resource type="Animation" uid="uid://fi3wdcise6i7" path="res://PlayerStuff/Animations/AttackSword_02.res" id="9_2wlbw"]
 [ext_resource type="Animation" uid="uid://c02k26vhaa26l" path="res://PlayerStuff/Animations/Blub.res" id="10_406my"]
 [ext_resource type="Resource" uid="uid://wmh85hi8iy40" path="res://Prefabs/Resources/InputActions/MoveRight.tres" id="10_l6ohk"]
-[ext_resource type="Script" uid="uid://d08s5tda6wj5i" path="res://Scripts/CAnimationTree.gd" id="11_gy83n"]
+[ext_resource type="Script" uid="uid://d08s5tda6wj5i" path="res://Scripts/Components/CAnimationTree.gd" id="11_gy83n"]
 [ext_resource type="Resource" uid="uid://fs1c3t8g02pw" path="res://Prefabs/Resources/InputActions/Jump.tres" id="11_l6ohk"]
 [ext_resource type="Animation" uid="uid://cmmq0r5wl7v7o" path="res://PlayerStuff/Animations/Idle.res" id="12_2ywdf"]
 [ext_resource type="Animation" uid="uid://dcv18hhk2ny1a" path="res://PlayerStuff/Animations/Jump.res" id="13_3b1fg"]
 [ext_resource type="Animation" uid="uid://c8intslu85o31" path="res://PlayerStuff/Animations/Run.res" id="14_k7qm6"]
 [ext_resource type="Animation" uid="uid://8dvbjrji5lqt" path="res://PlayerStuff/Animations/Run_001.res" id="15_fdj0h"]
+[ext_resource type="Resource" uid="uid://sj5nunxeml24" path="res://Prefabs/Resources/InputActions/AbilitySlot1.tres" id="22_gy83n"]
 [ext_resource type="Resource" uid="uid://b8i8mb41d8u15" path="res://Prefabs/Resources/InputActions/ShowCursor.tres" id="23_53vlf"]
 [ext_resource type="Resource" uid="uid://cu7h2rd2s7d6o" path="res://Prefabs/Resources/InputActions/CaptureCursor.tres" id="24_fuy0y"]
 [ext_resource type="Resource" uid="uid://tqij44h7k18x" path="res://Prefabs/Resources/InputActions/Attack.tres" id="25_406my"]
 [ext_resource type="Script" uid="uid://b0b5cfu7c7dan" path="res://Addons/GodotEnhancedInputSystem/Classes/InputAction.gd" id="26_406my"]
 [ext_resource type="Resource" uid="uid://cdee3cbgrq4gg" path="res://Prefabs/Resources/InputActions/MappingContexts/VisibleCursorContext.tres" id="26_gy83n"]
-[ext_resource type="Script" uid="uid://2kwao4oqmq2a" path="res://Scripts/Resources/ComboAttack.gd" id="27_fd4tb"]
-[ext_resource type="Resource" uid="uid://cdxllkv0s4hh6" path="res://Prefabs/ComboAttacks/LightAttack.tres" id="28_2ywdf"]
+[ext_resource type="Script" uid="uid://ry2r7owg3mp0" path="res://Scripts/Resources/ComboAbility.gd" id="28_2ywdf"]
 [ext_resource type="Resource" uid="uid://74ceqco7ko5c" path="res://Prefabs/Resources/InputActions/MappingContexts/CombatContext.tres" id="28_fd4tb"]
+[ext_resource type="Resource" uid="uid://dtn1ypsx6wnmd" path="res://Prefabs/Resources/ComboAttacks/Light1.tres" id="29_3b1fg"]
+[ext_resource type="Resource" uid="uid://dbthqhadk3ymf" path="res://Prefabs/Resources/ComboAttacks/Tornado.tres" id="30_k7qm6"]
+[ext_resource type="Script" uid="uid://cprhbtntfb7bw" path="res://Scripts/Components/AimComponent.gd" id="32_k7qm6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2wlbw"]
 size = Vector3(0.854004, 1, 0.531006)
@@ -1115,7 +1118,7 @@ input_1/reset = true
 animation = &"Player/Run"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_fuy0y"]
-graph_offset = Vector2(-496.251, 74.918)
+graph_offset = Vector2(-1042.07, 52.5335)
 nodes/Fall/node = SubResource("AnimationNodeAnimation_fuy0y")
 nodes/Fall/position = Vector2(-320, 520)
 nodes/GroundedAir/node = SubResource("AnimationNodeTransition_53vlf")
@@ -1129,12 +1132,11 @@ nodes/Jump/position = Vector2(-660, 380)
 nodes/JumpFall/node = SubResource("AnimationNodeTransition_bhh4y")
 nodes/JumpFall/position = Vector2(-180, 260)
 nodes/Run/node = SubResource("AnimationNodeAnimation_54dtf")
-nodes/Run/position = Vector2(-680, 200)
+nodes/Run/position = Vector2(-660, 180)
 nodes/output/position = Vector2(560, 180)
 node_connections = [&"GroundedAir", 0, &"IdleRunBlend", &"GroundedAir", 1, &"JumpFall", &"IdleRunBlend", 0, &"Idle", &"IdleRunBlend", 1, &"Run", &"JumpFall", 0, &"Jump", &"JumpFall", 1, &"Fall", &"output", 0, &"GroundedAir"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_fdj0h"]
-graph_offset = Vector2(-810.575, 3.02509)
 nodes/Attack/node = SubResource("AnimationNodeAnimation_fd4tb")
 nodes/Attack/position = Vector2(-1000, 300)
 nodes/AttackAdd/node = SubResource("AnimationNodeAdd2_gy83n")
@@ -1144,7 +1146,7 @@ nodes/AttackOneShot/position = Vector2(-640, 140)
 nodes/AttackRESET/node = SubResource("AnimationNodeAnimation_2ywdf")
 nodes/AttackRESET/position = Vector2(-860, 140)
 nodes/Movement/node = SubResource("AnimationNodeBlendTree_fuy0y")
-nodes/Movement/position = Vector2(-860, 20)
+nodes/Movement/position = Vector2(-860, -20)
 nodes/output/position = Vector2(-140, 60)
 node_connections = [&"AttackAdd", 0, &"Movement", &"AttackAdd", 1, &"AttackOneShot", &"AttackOneShot", 0, &"AttackRESET", &"AttackOneShot", 1, &"Attack", &"output", 0, &"AttackAdd"]
 
@@ -1166,8 +1168,24 @@ shader_parameter/highlight_strength = 0.1
 shader_parameter/highlight_color = Color(1, 1, 1, 1)
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
 
-[node name="Player" type="CharacterBody3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7qm6"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_k7qm6"]
+material = SubResource("StandardMaterial3D_k7qm6")
+radius = 0.05
+height = 0.1
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("animation_tree", "animation_player", "pivot", "camera_3d", "player_controller", "attack_component")]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_xhfnw")
+animation_tree = NodePath("AnimationTree")
+animation_player = NodePath("AnimationPlayer")
+pivot = NodePath("Pivot")
+camera_3d = NodePath("Pivot/Camera3D")
+player_controller = NodePath("Components/PlayerController")
+attack_component = NodePath("Components/Attack")
 
 [node name="MeshPivot" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.00313002, 0)
@@ -1191,7 +1209,7 @@ libraries = {
 &"Player": SubResource("AnimationLibrary_h3dj0")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." node_paths=PackedStringArray("attack_component")]
 root_node = NodePath("../MeshPivot/Mesh")
 tree_root = SubResource("AnimationNodeBlendTree_fdj0h")
 anim_player = NodePath("../AnimationPlayer")
@@ -1199,7 +1217,7 @@ parameters/AttackAdd/add_amount = 1.0
 parameters/AttackOneShot/active = false
 parameters/AttackOneShot/internal_active = false
 parameters/AttackOneShot/request = 0
-parameters/Movement/GroundedAir/current_state = false
+parameters/Movement/GroundedAir/current_state = "Grounded"
 parameters/Movement/GroundedAir/transition_request = ""
 parameters/Movement/GroundedAir/current_index = 0.492366
 parameters/Movement/IdleRunBlend/blend_amount = 1.0
@@ -1207,6 +1225,7 @@ parameters/Movement/JumpFall/current_state = false
 parameters/Movement/JumpFall/transition_request = 1.04167
 parameters/Movement/JumpFall/current_index = 0.492366
 script = ExtResource("11_gy83n")
+attack_component = NodePath("../Components/Attack")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.504951, 0)
@@ -1214,10 +1233,10 @@ shape = SubResource("CapsuleShape3D_xhfnw")
 
 [node name="Pivot" type="SpringArm3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0.406783, 1.34029, 0)
-spring_length = 4.0
+spring_length = 2.0
 
 [node name="Camera3D" type="Camera3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+transform = Transform3D(1, 0, 0, 0, 0.972626, -0.232376, 0, 0.232376, 0.972626, 0.484427, -0.717714, 1.75221)
 near = 0.001
 script = ExtResource("4_cxr5p")
 
@@ -1229,7 +1248,9 @@ ignore_occlusion_culling = true
 mesh = SubResource("QuadMesh_dtqjt")
 surface_material_override/0 = SubResource("ShaderMaterial_cxr5p")
 
-[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("mesh_pivot")]
+[node name="Components" type="Node" parent="."]
+
+[node name="PlayerController" type="Node" parent="Components" node_paths=PackedStringArray("player", "camera", "pivot", "mesh_pivot")]
 script = ExtResource("6_tdg3f")
 ia_move_up = ExtResource("7_dtqjt")
 ia_move_down = ExtResource("8_3tkgg")
@@ -1239,16 +1260,34 @@ ia_jump = ExtResource("11_l6ohk")
 ia_show_cursor = ExtResource("23_53vlf")
 ia_capture_cursor = ExtResource("24_fuy0y")
 ia_attack = ExtResource("25_406my")
+ia_ability_slot_1 = ExtResource("22_gy83n")
 base_context = ExtResource("8_5ncpa")
 visible_cursor_context = ExtResource("26_gy83n")
 combat_context = ExtResource("28_fd4tb")
-mesh_pivot = NodePath("../MeshPivot")
+player = NodePath("../..")
+camera = NodePath("../../Pivot/Camera3D")
+pivot = NodePath("../../Pivot")
+mesh_pivot = NodePath("../../MeshPivot")
 
-[node name="Attack" type="Node" parent="." node_paths=PackedStringArray("own_body", "player_controller", "attack_area")]
+[node name="Attack" type="Node" parent="Components" node_paths=PackedStringArray("own_body", "player_controller", "attack_area", "animation_tree", "aim_component")]
 script = ExtResource("7_fd4tb")
-own_body = NodePath("..")
+own_body = NodePath("../..")
 player_controller = NodePath("../PlayerController")
-attack_area = NodePath("../MeshPivot/Area3D")
-abilities = Dictionary[ExtResource("26_406my"), ExtResource("27_fd4tb")]({
-ExtResource("25_406my"): ExtResource("28_2ywdf")
+attack_area = NodePath("../../MeshPivot/Area3D")
+animation_tree = NodePath("../../AnimationTree")
+aim_component = NodePath("../../Aim")
+abilities = Dictionary[ExtResource("26_406my"), ExtResource("28_2ywdf")]({
+ExtResource("25_406my"): ExtResource("29_3b1fg"),
+ExtResource("22_gy83n"): ExtResource("30_k7qm6")
 })
+
+[node name="Aim" type="Node3D" parent="." node_paths=PackedStringArray("camera", "debug_mesh")]
+script = ExtResource("32_k7qm6")
+raycast_collision_mask = 3
+debug_raycast = true
+camera = NodePath("../Pivot/Camera3D")
+debug_mesh = NodePath("AimTarget")
+
+[node name="AimTarget" type="MeshInstance3D" parent="Aim"]
+visible = false
+mesh = SubResource("SphereMesh_k7qm6")

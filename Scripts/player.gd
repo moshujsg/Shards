@@ -1,17 +1,17 @@
-class_name Player extends CharacterBody3D
+class_name NPlayer extends NCharacter
 
-@onready var animation_tree: AnimationTree = $AnimationTree
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var pivot : SpringArm3D = $Pivot
-@onready var camera_3d: Camera3D = $Pivot/Camera3D
-@onready var tree_root := animation_tree.tree_root as AnimationNodeStateMachine
-@onready var player_controller: MainPlayerController = $PlayerController
-@onready var attack_component: CAttackComponent = $Attack
+@export var animation_tree: AnimationTree 
+@export var animation_player: AnimationPlayer 
+@export var pivot : SpringArm3D 
+@export var camera_3d: Camera3D 
+@export var player_controller: MainPlayerController 
+@export var attack_component: CAttackComponent 
 
 
 func _ready() -> void:
 	#player_controller.player_jumped.connect(_on_jump)
 	pass
+
 
 func _physics_process(delta: float) -> void:
 	var speed : float = Vector2(velocity.x, velocity.z).length()

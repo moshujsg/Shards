@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="InputMappingContext" load_steps=8 format=3 uid="uid://74ceqco7ko5c"]
+[gd_resource type="Resource" script_class="InputMappingContext" load_steps=12 format=3 uid="uid://74ceqco7ko5c"]
 
 [ext_resource type="Script" uid="uid://ba7pjrfkdn0yb" path="res://Addons/GodotEnhancedInputSystem/Classes/InputActionContainer.gd" id="1_kp60q"]
 [ext_resource type="Script" uid="uid://dxf7fy688y1i4" path="res://Addons/GodotEnhancedInputSystem/Classes/InputMappingContext.gd" id="2_8xiob"]
 [ext_resource type="Resource" uid="uid://tqij44h7k18x" path="res://Prefabs/Resources/InputActions/Attack.tres" id="2_ufa8h"]
 [ext_resource type="Script" uid="uid://bfq6tn2qygcsl" path="res://Addons/GodotEnhancedInputSystem/Classes/InputActionProperties.gd" id="3_qw4xs"]
+[ext_resource type="Resource" uid="uid://sj5nunxeml24" path="res://Prefabs/Resources/InputActions/AbilitySlot1.tres" id="4_qw4xs"]
 
 [sub_resource type="InputEventMouseButton" id="InputEventMouseButton_rbbhg"]
 button_mask = 1
@@ -30,8 +31,31 @@ action = ExtResource("2_ufa8h")
 action_properties = Array[ExtResource("3_qw4xs")]([SubResource("Resource_uirt1")])
 metadata/_custom_type_script = "uid://ba7pjrfkdn0yb"
 
+[sub_resource type="InputEventKey" id="InputEventKey_rbbhg"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="Resource" id="Resource_tk0we"]
+script = ExtResource("3_qw4xs")
+event = SubResource("InputEventKey_rbbhg")
+trigger = 0
+value_type = 0
+modifiers = Array[int]([])
+axis_order = 0
+hold_threshold_ms = 300
+tap_threshold_ms = 150
+one_shot = false
+metadata/_custom_type_script = "uid://bfq6tn2qygcsl"
+
+[sub_resource type="Resource" id="Resource_xy67r"]
+script = ExtResource("1_kp60q")
+action = ExtResource("4_qw4xs")
+action_properties = Array[ExtResource("3_qw4xs")]([SubResource("Resource_tk0we")])
+metadata/_custom_type_script = "uid://ba7pjrfkdn0yb"
+
 [resource]
 script = ExtResource("2_8xiob")
 name = "CombatContext"
-action_containers = Array[ExtResource("1_kp60q")]([SubResource("Resource_enp0f")])
+action_containers = Array[ExtResource("1_kp60q")]([SubResource("Resource_enp0f"), SubResource("Resource_xy67r")])
 metadata/_custom_type_script = "uid://dxf7fy688y1i4"
