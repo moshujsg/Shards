@@ -11,9 +11,10 @@ script = ExtResource("1_kocqw")
 visual_effect_scene = ExtResource("2_utrpb")
 vfx_animation_name = ""
 use_global_space = true
-lifetime = 1.0
 cast_range = 15.0
+lifetime = 1.0
 type = 1
+damage = 40
 metadata/_custom_type_script = "uid://b0m8k5fpdfw7n"
 
 [resource]

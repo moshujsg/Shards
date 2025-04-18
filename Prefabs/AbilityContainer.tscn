@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0e0uubn8dq75"]
+
+[ext_resource type="Script" uid="uid://cd16o4o0hl2rx" path="res://Scripts/VisualEffect.gd" id="1_tn5k6"]
+
+[node name="AbilityEntity" type="Node3D" node_paths=PackedStringArray("vfx")]
+script = ExtResource("1_tn5k6")
+effect_area_mask = 2
+vfx = NodePath("")

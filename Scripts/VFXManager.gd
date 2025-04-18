@@ -1,6 +1,6 @@
 class_name AbilityManager extends Node3D
 
-const PREFAB : PackedScene = preload("res://Prefabs/VFXScene.tscn")
+const PREFAB : PackedScene = preload("res://Prefabs/AbilityContainer.tscn")
 @export_flags_3d_physics var raycast_collision_mask : int
 
 func _ready() -> void:
@@ -14,8 +14,8 @@ func _on_ability_used(event_data: RAbilityEventData) -> void:
 func spawn_ability(event_data: RAbilityEventData) -> void:
 	if not event_data.ability_data.visual_effect_scene:
 		return
-	var prefab := PREFAB.instantiate() as NVFXContainer
-	prefab.setup(event_data.ability_data.visual_effect_scene)
+	var prefab := PREFAB.instantiate() as NAbility
+	prefab.setup(event_data.ability_data)
 	#prefab.top_level = ability_data.use_global_space
 	add_child(prefab)
 	prefab.global_position = find_ground_from_position(event_data.spawn_position)

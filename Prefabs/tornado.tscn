@@ -249,33 +249,33 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_04y7a")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tbvxk"]
-size = Vector3(2.74173, 2.29611, 2.85089)
+size = Vector3(1.17188, 1.05767, 1.23708)
 
 [sub_resource type="Animation" id="Animation_jkqax"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Area3D/CollisionShape3D:shape:size")
+tracks/0/path = NodePath("Area3D/CollisionShape3D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(2.74173, 2.29611, 2.85089)]
+"update": 1,
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Area3D/CollisionShape3D:disabled")
+tracks/1/path = NodePath("Area3D/CollisionShape3D:shape:size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector3(1.17188, 1.05767, 1.23708)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qnvsj"]
@@ -287,33 +287,34 @@ _data = {
 [node name="vfx" type="Node3D"]
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.0651041, 0)
 bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 bones/0/enabled = true
 bones/0/position = Vector3(0, 0, 0)
-bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/0/rotation = Quaternion(0, 0.780639, 0, 0.624982)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.001"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13587, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(0, 0.13587, 0)
-bones/1/rotation = Quaternion(0, 0, 0, 1)
+bones/1/rotation = Quaternion(0, 0.780639, 0, 0.624982)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Bone.002"
 bones/2/parent = 1
 bones/2/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.163043, 0)
 bones/2/enabled = true
 bones/2/position = Vector3(0, 0.163043, 0)
-bones/2/rotation = Quaternion(0, 0, 0, 1)
+bones/2/rotation = Quaternion(0, 0.780639, 0, 0.624982)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "Bone.003"
 bones/3/parent = 2
 bones/3/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.190217, 0)
 bones/3/enabled = true
 bones/3/position = Vector3(0, 0.190217, 0)
-bones/3/rotation = Quaternion(0, 0, 0, 1)
+bones/3/rotation = Quaternion(0, 0.780639, 0, 0.624982)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "Bone.004"
 bones/4/parent = 3
@@ -373,7 +374,7 @@ bones/11/rotation = Quaternion(0, 0, 0, 1)
 bones/11/scale = Vector3(0.869565, 0.869565, 0.869565)
 
 [node name="Circle_003" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(10.163, 0, 0, 0, 10.163, 0, 0, 0, 10.163, 1.49012e-08, 0.733695, -1.86265e-09)
+transform = Transform3D(6.45717, 0, 7.84803, 0, 10.163, 0, -7.84803, 0, 6.45717, 8.02927e-09, 0.733695, -1.26904e-08)
 bone_name = "Circle.003"
 bone_idx = 5
 
@@ -382,7 +383,7 @@ mesh = SubResource("ArrayMesh_2f11o")
 skeleton = NodePath("")
 
 [node name="Circle_002" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(6.83913, 0, 0, 0, 6.83913, 0, 0, 0, 6.83913, 0, 0.48913, -1.16415e-10)
+transform = Transform3D(4.34532, 0, 5.28128, 0, 6.83913, 0, -5.28128, 0, 4.34532, -8.98975e-11, 0.48913, -7.39656e-11)
 bone_name = "Circle.002"
 bone_idx = 6
 
@@ -391,7 +392,7 @@ mesh = SubResource("ArrayMesh_d4cm5")
 skeleton = NodePath("")
 
 [node name="Circle_006" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(6.83913, 0, 0, 0, 6.83913, 0, 0, 0, 6.83913, 0.000488907, 0.652174, -0.0493811)
+transform = Transform3D(4.34532, 0, 5.28128, 0, 6.83913, 0, -5.28128, 0, 4.34532, -0.0378222, 0.652174, -0.0317524)
 bone_name = "Circle.006"
 bone_idx = 7
 
@@ -400,7 +401,7 @@ mesh = SubResource("ArrayMesh_7rooe")
 skeleton = NodePath("")
 
 [node name="Circle_001" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(5.26087, 0, 0, 0, 5.26087, 0, 0, 0, 5.26087, 0, 0.298913, -3.72529e-09)
+transform = Transform3D(3.23276, 0, -4.15043, 0, 5.26087, 0, 4.15043, 0, 3.23276, 2.93897e-09, 0.298913, -2.28916e-09)
 bone_name = "Circle.001"
 bone_idx = 8
 
@@ -409,7 +410,7 @@ mesh = SubResource("ArrayMesh_jynw0")
 skeleton = NodePath("")
 
 [node name="Circle" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(0.434783, 0, 0, 0, 0.434783, 0, 0, 0, 0.434783, 0, 0.13587, 0)
+transform = Transform3D(-0.393156, 0, -0.185648, 0, 0.434783, 0, 0.185648, 0, -0.393156, 0, 0.13587, 0)
 bone_name = "Circle"
 bone_idx = 9
 
@@ -418,7 +419,7 @@ mesh = SubResource("ArrayMesh_7tf6o")
 skeleton = NodePath("")
 
 [node name="Circle_005" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(0.00620267, 0, 0.434739, 0, 0.434783, 0, -0.434739, 0, 0.00620267, 0.0163354, 0.217392, 0.0503801)
+transform = Transform3D(0.18002, 0, -0.395764, 0, 0.434783, 0, 0.395764, 0, 0.18002, -0.0362832, 0.217392, -0.0385815)
 bone_name = "Circle.005"
 bone_idx = 10
 
@@ -427,7 +428,7 @@ mesh = SubResource("ArrayMesh_6loxa")
 skeleton = NodePath("")
 
 [node name="Circle_004" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(0.869565, 0, 0, 0, 0.869565, 0, 0, 0, 0.869565, 0, 0, 0)
+transform = Transform3D(-0.190257, 0, 0.848496, 0, 0.869565, 0, -0.848496, 0, -0.190257, 0, 0, 0)
 bone_name = "Circle.004"
 bone_idx = 11
 
@@ -436,9 +437,10 @@ mesh = SubResource("ArrayMesh_nwanq")
 skeleton = NodePath("")
 
 [node name="Area3D" type="Area3D" parent="."]
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0035553, 1.15706, 0.0227356)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00816166, 1.02278, 0.0351276)
 shape = SubResource("BoxShape3D_tbvxk")
 disabled = true
 debug_fill = false

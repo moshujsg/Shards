@@ -53,3 +53,6 @@ res://Scripts/Components/AimComponent.gd
 res://Scripts/Events/EventDataTypes/AbilityEventData.gd
 res://Prefabs/Resources/ComboAttacks/Light2.tres
 res://Scripts/Utils.gd
+res://Prefabs/Ability.tscn
+res://Prefabs/AbilityAbility.tscn
+res://Prefabs/AbilityContainer.tscn
