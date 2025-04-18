@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://2myuylmvmhen"]
+[gd_scene load_steps=59 format=3 uid="uid://2myuylmvmhen"]
 
 [ext_resource type="Script" uid="uid://b6kmn7ys0sakr" path="res://Scripts/player.gd" id="1_xhfnw"]
 [ext_resource type="PackedScene" uid="uid://dtb5i5vpvma8n" path="res://PlayerStuff/Player_v1.glb" id="2_kpjcp"]
@@ -1064,7 +1064,7 @@ _data = {
 &"Idle": ExtResource("12_2ywdf"),
 &"Jump": ExtResource("13_3b1fg"),
 &"Run": ExtResource("14_k7qm6"),
-&"Run_001": ExtResource("15_fdj0h"),
+&"RunBackwards": ExtResource("15_fdj0h"),
 &"TestAttack": SubResource("Animation_2ywdf")
 }
 
@@ -1114,39 +1114,52 @@ input_1/auto_advance = false
 input_1/break_loop_at_end = false
 input_1/reset = true
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_54dtf"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k7qm6"]
+animation = &"Player/Run"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fdj0h"]
 animation = &"Player/Run"
 
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_k7qm6"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_k7qm6")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_fdj0h")
+blend_point_1/pos = 1.0
+value_label = "ForwardVelocity"
+blend_mode = 1
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_fuy0y"]
-graph_offset = Vector2(-1042.07, 52.5335)
+graph_offset = Vector2(-822.419, -88.4812)
 nodes/Fall/node = SubResource("AnimationNodeAnimation_fuy0y")
-nodes/Fall/position = Vector2(-320, 520)
+nodes/Fall/position = Vector2(-200, 720)
 nodes/GroundedAir/node = SubResource("AnimationNodeTransition_53vlf")
-nodes/GroundedAir/position = Vector2(80, 80)
+nodes/GroundedAir/position = Vector2(180, 80)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_aw6xh")
-nodes/Idle/position = Vector2(-620, 0)
+nodes/Idle/position = Vector2(-640, -120)
 nodes/IdleRunBlend/node = SubResource("AnimationNodeBlend2_tkui5")
 nodes/IdleRunBlend/position = Vector2(-280, 0)
 nodes/Jump/node = SubResource("AnimationNodeAnimation_pg8dw")
-nodes/Jump/position = Vector2(-660, 380)
+nodes/Jump/position = Vector2(-220, 420)
 nodes/JumpFall/node = SubResource("AnimationNodeTransition_bhh4y")
-nodes/JumpFall/position = Vector2(-180, 260)
-nodes/Run/node = SubResource("AnimationNodeAnimation_54dtf")
-nodes/Run/position = Vector2(-660, 180)
+nodes/JumpFall/position = Vector2(-40, 320)
+nodes/RunAnim/node = SubResource("AnimationNodeBlendSpace1D_k7qm6")
+nodes/RunAnim/position = Vector2(-640, 60)
 nodes/output/position = Vector2(560, 180)
-node_connections = [&"GroundedAir", 0, &"IdleRunBlend", &"GroundedAir", 1, &"JumpFall", &"IdleRunBlend", 0, &"Idle", &"IdleRunBlend", 1, &"Run", &"JumpFall", 0, &"Jump", &"JumpFall", 1, &"Fall", &"output", 0, &"GroundedAir"]
+node_connections = [&"GroundedAir", 0, &"IdleRunBlend", &"GroundedAir", 1, &"JumpFall", &"IdleRunBlend", 0, &"Idle", &"IdleRunBlend", 1, &"RunAnim", &"JumpFall", 0, &"Jump", &"JumpFall", 1, &"Fall", &"output", 0, &"GroundedAir"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_fdj0h"]
+graph_offset = Vector2(-1014.04, -66.5428)
 nodes/Attack/node = SubResource("AnimationNodeAnimation_fd4tb")
-nodes/Attack/position = Vector2(-1000, 300)
+nodes/Attack/position = Vector2(-1240, 240)
 nodes/AttackAdd/node = SubResource("AnimationNodeAdd2_gy83n")
 nodes/AttackAdd/position = Vector2(-320, 0)
 nodes/AttackOneShot/node = SubResource("AnimationNodeOneShot_3b1fg")
 nodes/AttackOneShot/position = Vector2(-640, 140)
 nodes/AttackRESET/node = SubResource("AnimationNodeAnimation_2ywdf")
-nodes/AttackRESET/position = Vector2(-860, 140)
+nodes/AttackRESET/position = Vector2(-1100, 60)
 nodes/Movement/node = SubResource("AnimationNodeBlendTree_fuy0y")
-nodes/Movement/position = Vector2(-860, -20)
+nodes/Movement/position = Vector2(-1040, -80)
 nodes/output/position = Vector2(-140, 60)
 node_connections = [&"AttackAdd", 0, &"Movement", &"AttackAdd", 1, &"AttackOneShot", &"AttackOneShot", 0, &"AttackRESET", &"AttackOneShot", 1, &"Attack", &"output", 0, &"AttackAdd"]
 
@@ -1224,6 +1237,7 @@ parameters/Movement/IdleRunBlend/blend_amount = 1.0
 parameters/Movement/JumpFall/current_state = false
 parameters/Movement/JumpFall/transition_request = 1.04167
 parameters/Movement/JumpFall/current_index = 0.492366
+parameters/Movement/RunAnim/blend_position = -0.428571
 script = ExtResource("11_gy83n")
 attack_component = NodePath("../Components/Attack")
 

@@ -17,6 +17,8 @@ func _physics_process(delta: float) -> void:
 	var speed : float = Vector2(velocity.x, velocity.z).length()
 	var normalized_speed := clampf(speed / player_controller.SPEED, 0.0, 1.0)
 	animation_tree["parameters/Movement/IdleRunBlend/blend_amount"] = normalized_speed
+	var forward_velocity :=  velocity.dot(transform.basis.z) / player_controller.SPEED
+	animation_tree.set("parameters/Movement/RunAnim/blend_amount", forward_velocity)
 	if velocity.y != 0:
 		animation_tree.set("parameters/Movement/GroundedAir/transition_request", "OnAir") 
 		if velocity.y > 0:
