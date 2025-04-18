@@ -1,1 +1,7 @@
+# Ignore the .godot folder
+.godot/
+
+# Ignore temporary files and backups
+*.import
 *.tmp
+*.swp
