@@ -28,7 +28,7 @@ func _on_body_entered(body: Node3D) -> void:
 	var character := body as NCharacter
 	if not character:
 		return
-	var health_component : CHealth = character.get_node_or_null("Health")
+	var health_component : CHealth = character.get_node_or_null("CHealth")
 	if not health_component:
 		return
 	health_component.take_damage(ability_data.damage)

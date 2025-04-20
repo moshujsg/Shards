@@ -1,4 +1,4 @@
-class_name PlayerController extends Node
+class_name PlayerController extends Component
 
 signal on_action_triggered(action : InputAction)
 

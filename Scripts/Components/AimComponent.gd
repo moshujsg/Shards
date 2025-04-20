@@ -1,18 +1,18 @@
-class_name CAim extends Node3D
+class_name CAim extends Component
 
 @export_flags_3d_physics var raycast_collision_mask : int
 
 @export var debug_raycast : bool
-@export var camera : Camera3D
+@export var base_node: Node3D
 # Add these variables to your class
 @export var debug_mesh: MeshInstance3D
 
 
 
 func cast_ray(p_max_cast_distance: float) -> Dictionary:
-	var space_state := get_world_3d().direct_space_state
-	var origin := camera.global_transform.origin
-	var direction := -camera.global_transform.basis.z
+	var space_state := base_node.get_world_3d().direct_space_state
+	var origin := base_node.global_transform.origin
+	var direction := -base_node.global_transform.basis.z
 	var parameters := PhysicsRayQueryParameters3D.create(
 		origin,
 		origin + direction * p_max_cast_distance,

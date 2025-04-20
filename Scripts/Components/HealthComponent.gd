@@ -1,9 +1,8 @@
-class_name CHealth extends Node
+class_name CHealth extends Component
 
 signal on_damage_taken(p_damage: int)
 
 @export var body : CharacterBody3D
-@onready var collision_shape_3d: CollisionShape3D = $"../CollisionShape3D"
 
 @export var max_health := 100
 var health := max_health

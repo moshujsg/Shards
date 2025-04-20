@@ -29,11 +29,11 @@ const TURN_SPEED = 10
 @export var visible_cursor_context: InputMappingContext
 @export var combat_context: InputMappingContext
 
+@export_group("Nodes")
 @export var player : NPlayer 
 @export var camera: Camera3D
 @export var pivot: SpringArm3D
-@export var mesh_pivot: Node3D
-
+@export var attack_component : CAttackComponent
 var move_input : Vector2
 
 func _ready() -> void:
@@ -58,7 +58,7 @@ func _ready() -> void:
 	bind_action(ia_ability_slot_1, InputActionProperties.TriggerPhase.TRIGGERED, cast_ability.bind(ia_ability_slot_1))
 
 func cast_ability(p_object: InputObject, p_action: InputAction) -> void:
-	attack_triggered.emit(p_action)
+	attack_component.handle_action(p_action)
 
 func capture_cursor(p_action: InputObject) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

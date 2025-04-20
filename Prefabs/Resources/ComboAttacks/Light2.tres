@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RComboAbility" load_steps=6 format=3 uid="uid://dmyjpsya3wsp1"]
 
 [ext_resource type="Script" uid="uid://b0m8k5fpdfw7n" path="res://Scripts/Resources/AbilityData.gd" id="1_fyg3c"]
-[ext_resource type="Animation" uid="uid://fi3wdcise6i7" path="res://PlayerStuff/Animations/AttackSword_02.res" id="1_mdy2f"]
+[ext_resource type="Animation" uid="uid://fi3wdcise6i7" path="res://Assets/Animations/AttackSword_02.res" id="1_mdy2f"]
 [ext_resource type="Resource" uid="uid://tqij44h7k18x" path="res://Prefabs/Resources/InputActions/Attack.tres" id="2_5amm8"]
 [ext_resource type="Script" uid="uid://ry2r7owg3mp0" path="res://Scripts/Resources/ComboAbility.gd" id="4_ee2aj"]
 
@@ -9,9 +9,10 @@
 script = ExtResource("1_fyg3c")
 vfx_animation_name = ""
 use_global_space = false
-lifetime = 1.0
 cast_range = 15.0
+lifetime = 1.0
 type = 0
+damage = 0
 metadata/_custom_type_script = "uid://b0m8k5fpdfw7n"
 
 [resource]

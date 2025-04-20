@@ -1,10 +1,11 @@
-class_name CAttackComponent extends Node
+class_name CAttackComponent extends Component
 
 signal ability_used(ability: RComboAbility)
 
-@export var own_body: NCharacter
-@export var player_controller: MainPlayerController
 @export var attack_area: Area3D
+@export_flags_3d_physics var attack_area_layer : int
+@export_flags_3d_physics var attack_area_mask : int
+@export var own_body: NCharacter
 @export var animation_tree: CAnimationTree
 @export var aim_component : CAim
 var timer : Timer
@@ -12,14 +13,15 @@ var timer : Timer
 var current_step : RComboAbility
 
 func _ready() -> void:
-	player_controller.attack_triggered.connect(_on_attack_triggered)
-	attack_area.body_entered.connect(cast_attack)
 	timer = Timer.new()
 	add_child(timer)
 	timer.one_shot = true
 	timer.autostart = false
 	timer.timeout.connect(_on_timer_timeout)
 	animation_tree.attack_animation_finished.connect(start_timer)
+	attack_area.body_entered.connect(cast_attack)
+	#attack_area.collision_mask = attack_area_mask
+	#attack_area.collision_layer = attack_area_layer
 
 func start_timer() -> void:
 	# Only open the window if there's a current follow up
@@ -35,7 +37,7 @@ func _on_timer_timeout() -> void:
 func cast_attack(p_body: Node3D) -> void:
 	if not p_body is CharacterBody3D or p_body == own_body:
 		return
-	var health_component : CHealth = p_body.get_node_or_null("Health")
+	var health_component : CHealth = p_body.get_node_or_null("CHealth")
 	if not health_component:
 		return
 	health_component.take_damage(10)
@@ -52,7 +54,7 @@ func is_valid_aim_target(target: Dictionary) -> bool:
 	# For now only AOE needs a cast target (ground or enemy)
 	return !target.is_empty()
 
-func _on_attack_triggered(p_action: InputAction) -> void:
+func handle_action(p_action: InputAction) -> void:
 	if animation_tree.is_playing():
 		return
 
