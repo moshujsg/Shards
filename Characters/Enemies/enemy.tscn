@@ -341,12 +341,11 @@ script = ExtResource("4_80imi")
 script = ExtResource("3_t4g6b")
 body = NodePath("..")
 
-[node name="CAttackComponent" type="Node" parent="." node_paths=PackedStringArray("attack_area", "own_body", "animation_tree", "aim_component")]
+[node name="CAttackComponent" type="Node" parent="." node_paths=PackedStringArray("attack_area", "own_body", "aim_component")]
 script = ExtResource("5_n7q57")
 attack_area = NodePath("../AttackArea")
 attack_area_layer = 4
 attack_area_mask = 2
 own_body = NodePath("..")
-animation_tree = NodePath("../AnimationTree")
 aim_component = NodePath("../CAim")
 metadata/_custom_type_script = "uid://mwqvmq22h2f7"

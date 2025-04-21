@@ -563,7 +563,7 @@ move_component = NodePath("Move")
 [node name="Mesh" parent="." instance=ExtResource("2_kpjcp")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.00313002, 0)
 
-[node name="AnimationTree" type="AnimationTree" parent="." node_paths=PackedStringArray("attack_component")]
+[node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../Mesh")
 tree_root = SubResource("AnimationNodeBlendTree_fdj0h")
 anim_player = NodePath("../AnimationPlayer")
@@ -577,7 +577,6 @@ parameters/Movement/GroundedAir/current_index = 0.492366
 parameters/Movement/IdleRunBlend/blend_amount = 1.0
 parameters/Movement/RunAnim/blend_position = -0.428571
 script = ExtResource("11_gy83n")
-attack_component = NodePath("../Attack")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Mesh")
@@ -621,7 +620,7 @@ raycast_collision_mask = 3
 debug_raycast = true
 base_node = NodePath("../Pivot/Camera3D")
 
-[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("player", "camera", "pivot", "attack_component")]
+[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("player", "camera", "pivot", "attack_component", "move_component", "animation_component", "aim_component")]
 script = ExtResource("6_tdg3f")
 ia_move_up = ExtResource("7_dtqjt")
 ia_move_down = ExtResource("8_3tkgg")
@@ -639,13 +638,15 @@ player = NodePath("..")
 camera = NodePath("../Pivot/Camera3D")
 pivot = NodePath("../Pivot")
 attack_component = NodePath("../Attack")
+move_component = NodePath("../Move")
+animation_component = NodePath("../AnimationTree")
+aim_component = NodePath("../Aim")
 
-[node name="Attack" type="Node" parent="." node_paths=PackedStringArray("attack_area", "own_body", "animation_tree", "aim_component")]
+[node name="Attack" type="Node" parent="." node_paths=PackedStringArray("attack_area", "own_body", "aim_component")]
 script = ExtResource("7_fd4tb")
 attack_area = NodePath("../AttackArea")
 attack_area_mask = 2
 own_body = NodePath("..")
-animation_tree = NodePath("../AnimationTree")
 aim_component = NodePath("../Aim")
 abilities = Dictionary[ExtResource("26_406my"), ExtResource("28_2ywdf")]({
 ExtResource("25_406my"): ExtResource("29_3b1fg"),
@@ -654,6 +655,6 @@ ExtResource("22_gy83n"): ExtResource("30_k7qm6")
 
 [node name="Move" type="Node" parent="." node_paths=PackedStringArray("character", "forward_node")]
 script = ExtResource("34_xxflj")
-character = NodePath("..")
 SPEED = 5.0
+character = NodePath("..")
 forward_node = NodePath("../Pivot/Camera3D")

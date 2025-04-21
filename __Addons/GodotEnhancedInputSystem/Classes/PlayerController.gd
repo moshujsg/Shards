@@ -44,7 +44,7 @@ func handle_event(container: InputActionContainer, event: InputEvent, action_nam
 		container.on_action_ended(event)
 	return handled
 
-func update(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	#var start_time := Time.get_ticks_usec()
 
 	for container in ongoing_actions:

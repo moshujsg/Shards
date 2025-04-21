@@ -3,7 +3,6 @@ class_name MainPlayerController extends PlayerController
 signal player_jumped
 signal attack_triggered(action: InputAction)
 
-const JUMP_VELOCITY = 4.5
 const MOUSE_SENSITIVITY = 0.010
 const TURN_SPEED = 10
 
@@ -28,6 +27,9 @@ const TURN_SPEED = 10
 @export var camera: Camera3D
 @export var pivot: SpringArm3D
 @export var attack_component : CAttackComponent
+@export var move_component : CMove
+@export var animation_component: CAnimationTree
+@export var aim_component : CAim
 var move_input : Vector2
 
 func _ready() -> void:
@@ -56,7 +58,26 @@ func _ready() -> void:
 	bind_action(ia_ability_slot_1, InputActionProperties.TriggerPhase.TRIGGERED, cast_ability.bind(ia_ability_slot_1))
 
 func cast_ability(p_object: InputObject, p_action: InputAction) -> void:
-	attack_component.handle_action(p_action)
+	if animation_component.is_playing():
+		return
+	var ability := attack_component.get_next_ability(p_action)
+
+	# Check if target is a valid aim target
+	var target_position := Vector3.ZERO
+	if ability.ability_data.needs_target():
+		var target : Dictionary = aim_component.cast_ray(ability.ability_data.cast_range)
+		if not attack_component.is_valid_aim_target(target):
+			return
+		target_position = target["position"] as Vector3
+
+	# confirm use of ability and get event data
+	var ability_event_data : RAbilityEventData = attack_component.use_ability(ability)
+	ability_event_data.spawn_position = target_position
+	EventBus.broadcast(
+		"ability_used",
+		ability_event_data
+	)
+	animation_component.play_attack_animation(attack_component.get_character_animation())
 
 func capture_cursor(p_action: InputObject) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -72,9 +93,7 @@ func show_cursor(p_action: InputObject) -> void:
 	pass
 
 func jump(p_action: InputObject) -> void:
-	if player.is_on_floor():
-		player.velocity.y += JUMP_VELOCITY
-		player_jumped.emit()
+	move_component.jump()
 
 func handle_move(object: InputObject) -> void:
 	var value := object.get_value_as_vector2()
@@ -96,3 +115,10 @@ func _input(event: InputEvent) -> void:
 		var pitch := _event.relative.y * MOUSE_SENSITIVITY
 		pitch = clamp(pitch, deg_to_rad(-80), deg_to_rad(80))
 		pivot.rotation.x -= pitch
+
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
+	move_component.update(delta, move_input)
+	animation_component.set("parameters/Movement/RunAnim/blend_amount", move_component.forward_velocity)
+	animation_component.set("parameters/Movement/IdleRunBlend/blend_amount", move_component.normalized_speed)
+	animation_component.set("parameters/Movement/GroundedAir/transition_request", move_component.get_state_as_string()) 

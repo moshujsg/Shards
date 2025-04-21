@@ -2,7 +2,6 @@ class_name CAnimationTree extends AnimationTree
 
 signal attack_animation_finished
 
-@export var attack_component : CAttackComponent
 var playback : AnimationNodeStateMachinePlayback = get("parameters/StateMachine/playback")
 var attack_node : AnimationNodeAnimation 
 var is_playing_animation : bool:
@@ -15,8 +14,6 @@ var flag : bool
 
 func _ready() -> void:
 	attack_node = ((tree_root as AnimationNodeBlendTree).get_node("Attack") as AnimationNodeAnimation)
-	if attack_component:
-		attack_component.ability_used.connect(_on_ability_used)
 
 func _on_ability_used(ability: RComboAbility) -> void:
 	play_attack_animation(ability.animation_name)

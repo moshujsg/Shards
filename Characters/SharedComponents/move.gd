@@ -13,9 +13,14 @@ var state_as_string := {
 }
 
 var state : State
-@export var character : NCharacter
+@export_group("Values")
 @export var SPEED : float
+@export var JUMP_VELOCITY := 4.5
+
+@export_group("Nodes")
+@export var character : NCharacter
 @export var forward_node : Node3D
+
 var normalized_speed : float
 var forward_velocity : float
 
@@ -57,3 +62,8 @@ func update(delta: float, move_input: Vector2) -> void:
 			state = State.FALL
 	else:
 		state = State.GROUNDED
+
+
+func jump() -> void:
+	if character.is_on_floor():
+		character.velocity.y += JUMP_VELOCITY

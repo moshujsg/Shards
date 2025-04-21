@@ -6,7 +6,6 @@ signal ability_used(ability: RComboAbility)
 @export_flags_3d_physics var attack_area_layer : int
 @export_flags_3d_physics var attack_area_mask : int
 @export var own_body: NCharacter
-@export var animation_tree: CAnimationTree
 @export var aim_component : CAim
 var timer : Timer
 @export var abilities : Dictionary[InputAction, RComboAbility]
@@ -18,7 +17,6 @@ func _ready() -> void:
 	timer.one_shot = true
 	timer.autostart = false
 	timer.timeout.connect(_on_timer_timeout)
-	animation_tree.attack_animation_finished.connect(start_timer)
 	attack_area.body_entered.connect(cast_attack)
 	#attack_area.collision_mask = attack_area_mask
 	#attack_area.collision_layer = attack_area_layer
@@ -54,39 +52,22 @@ func is_valid_aim_target(target: Dictionary) -> bool:
 	# For now only AOE needs a cast target (ground or enemy)
 	return !target.is_empty()
 
-func handle_action(p_action: InputAction) -> void:
-	if animation_tree.is_playing():
-		return
+func get_character_animation() -> String:
+	return current_step.animation_name
 
+func get_next_ability(p_action: InputAction) -> RComboAbility:
 	if not abilities.has(p_action) and (not current_step or current_step.has_next_attack(p_action)):
-		return
-	var next_step : RComboAbility
+		return null
 	if is_new_combo(p_action):
-		next_step = abilities.get(p_action)
+		return abilities.get(p_action)
 	else:
-		next_step = current_step.get_next_attack(p_action)
+		return current_step.get_next_attack(p_action)
 
-	var target_position := Vector3.ZERO
-	if next_step.ability_data.needs_target():
-		var target : Dictionary
-		target = aim_component.cast_ray(next_step.ability_data.cast_range)
-		if not is_valid_aim_target(target):
-			return
-		target_position = target["position"] as Vector3
-
-	#animation_tree.play_attack_animation(current_step.animation_name)
-	ability_used.emit(next_step)
-	EventBus.broadcast(
-		"ability_used",
-		RAbilityEventData.new(
-			next_step.ability_data,
-			own_body,
-			target_position
-			)
-		)
-
+func use_ability(p_ability: RComboAbility) -> RAbilityEventData:
+	current_step = p_ability
 	timer.stop()
-	#print("Stopped timer")
-	
-	# Clean up the current step if it's last step
-	current_step = next_step
+	current_step = p_ability
+	return RAbilityEventData.new(
+			p_ability.ability_data,
+			own_body
+			)
