@@ -1,0 +1,154 @@
+[gd_resource type="Resource" script_class="InputMappingContext" load_steps=28 format=3 uid="uid://bgpjxaspigjx1"]
+
+[ext_resource type="Script" uid="uid://ba7pjrfkdn0yb" path="res://__Addons/GodotEnhancedInputSystem/Classes/InputActionContainer.gd" id="1_cc0mn"]
+[ext_resource type="Resource" uid="uid://d1im72y63x88v" path="res://Systems/Input/InputActions/MoveUp.tres" id="2_ay4uy"]
+[ext_resource type="Script" uid="uid://bfq6tn2qygcsl" path="res://__Addons/GodotEnhancedInputSystem/Classes/InputActionProperties.gd" id="3_4nroa"]
+[ext_resource type="Resource" uid="uid://dxnvu58qclbnd" path="res://Systems/Input/InputActions/MoveLeft.tres" id="4_2icgh"]
+[ext_resource type="Resource" uid="uid://dvuud1kxhl1k1" path="res://Systems/Input/InputActions/MoveDown.tres" id="5_3addd"]
+[ext_resource type="Resource" uid="uid://wmh85hi8iy40" path="res://Systems/Input/InputActions/MoveRight.tres" id="6_ewcy6"]
+[ext_resource type="Resource" uid="uid://fs1c3t8g02pw" path="res://Systems/Input/InputActions/Jump.tres" id="7_8hnqt"]
+[ext_resource type="Resource" uid="uid://b8i8mb41d8u15" path="res://Systems/Input/InputActions/ShowCursor.tres" id="8_7s4be"]
+[ext_resource type="Script" uid="uid://dxf7fy688y1i4" path="res://__Addons/GodotEnhancedInputSystem/Classes/InputMappingContext.gd" id="9_6devi"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_3vjh4"]
+device = -1
+keycode = 87
+unicode = 119
+
+[sub_resource type="Resource" id="Resource_d5oqq"]
+script = ExtResource("3_4nroa")
+event = SubResource("InputEventKey_3vjh4")
+trigger = 3
+value_type = 0
+modifiers = Array[int]([0])
+axis_order = 1
+hold_threshold_ms = 300
+tap_threshold_ms = 150
+one_shot = false
+metadata/_custom_type_script = "uid://bfq6tn2qygcsl"
+
+[sub_resource type="Resource" id="Resource_728ov"]
+script = ExtResource("1_cc0mn")
+action = ExtResource("2_ay4uy")
+action_properties = Array[ExtResource("3_4nroa")]([SubResource("Resource_d5oqq")])
+metadata/_custom_type_script = "uid://ba7pjrfkdn0yb"
+
+[sub_resource type="InputEventKey" id="InputEventKey_d5oqq"]
+device = -1
+keycode = 65
+unicode = 97
+
+[sub_resource type="Resource" id="Resource_7w4lp"]
+script = ExtResource("3_4nroa")
+event = SubResource("InputEventKey_d5oqq")
+trigger = 3
+value_type = 1
+modifiers = Array[int]([0])
+axis_order = 0
+hold_threshold_ms = 300
+tap_threshold_ms = 150
+one_shot = false
+metadata/_custom_type_script = "uid://bfq6tn2qygcsl"
+
+[sub_resource type="Resource" id="Resource_t1n65"]
+script = ExtResource("1_cc0mn")
+action = ExtResource("4_2icgh")
+action_properties = Array[ExtResource("3_4nroa")]([SubResource("Resource_7w4lp")])
+metadata/_custom_type_script = "uid://ba7pjrfkdn0yb"
+
+[sub_resource type="InputEventKey" id="InputEventKey_7vy2b"]
+device = -1
+keycode = 83
+unicode = 115
+
+[sub_resource type="Resource" id="Resource_vfc2v"]
+script = ExtResource("3_4nroa")
+event = SubResource("InputEventKey_7vy2b")
+trigger = 3
+value_type = 1
+modifiers = Array[int]([])
+axis_order = 1
+hold_threshold_ms = 300
+tap_threshold_ms = 150
+one_shot = false
+metadata/_custom_type_script = "uid://bfq6tn2qygcsl"
+
+[sub_resource type="Resource" id="Resource_48743"]
+script = ExtResource("1_cc0mn")
+action = ExtResource("5_3addd")
+action_properties = Array[ExtResource("3_4nroa")]([SubResource("Resource_vfc2v")])
+metadata/_custom_type_script = "uid://ba7pjrfkdn0yb"
+
+[sub_resource type="InputEventKey" id="InputEventKey_1teh8"]
+device = -1
+keycode = 68
+unicode = 100
+
+[sub_resource type="Resource" id="Resource_6b4bd"]
+script = ExtResource("3_4nroa")
+event = SubResource("InputEventKey_1teh8")
+trigger = 3
+value_type = 1
+modifiers = Array[int]([])
+axis_order = 0
+hold_threshold_ms = 300
+tap_threshold_ms = 150
+one_shot = false
+metadata/_custom_type_script = "uid://bfq6tn2qygcsl"
+
+[sub_resource type="Resource" id="Resource_upovw"]
+script = ExtResource("1_cc0mn")
+action = ExtResource("6_ewcy6")
+action_properties = Array[ExtResource("3_4nroa")]([SubResource("Resource_6b4bd")])
+metadata/_custom_type_script = "uid://ba7pjrfkdn0yb"
+
+[sub_resource type="InputEventKey" id="InputEventKey_vfc2v"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Resource" id="Resource_1teh8"]
+script = ExtResource("3_4nroa")
+event = SubResource("InputEventKey_vfc2v")
+trigger = 0
+value_type = 0
+modifiers = Array[int]([])
+axis_order = 0
+hold_threshold_ms = 300
+tap_threshold_ms = 150
+one_shot = false
+metadata/_custom_type_script = "uid://bfq6tn2qygcsl"
+
+[sub_resource type="Resource" id="Resource_8220e"]
+script = ExtResource("1_cc0mn")
+action = ExtResource("7_8hnqt")
+action_properties = Array[ExtResource("3_4nroa")]([SubResource("Resource_1teh8")])
+metadata/_custom_type_script = "uid://ba7pjrfkdn0yb"
+
+[sub_resource type="InputEventKey" id="InputEventKey_728ov"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Resource" id="Resource_vmynb"]
+script = ExtResource("3_4nroa")
+event = SubResource("InputEventKey_728ov")
+trigger = 0
+value_type = 0
+modifiers = Array[int]([])
+axis_order = 0
+hold_threshold_ms = 300
+tap_threshold_ms = 150
+one_shot = false
+metadata/_custom_type_script = "uid://bfq6tn2qygcsl"
+
+[sub_resource type="Resource" id="Resource_y202a"]
+script = ExtResource("1_cc0mn")
+action = ExtResource("8_7s4be")
+action_properties = Array[ExtResource("3_4nroa")]([SubResource("Resource_vmynb")])
+metadata/_custom_type_script = "uid://ba7pjrfkdn0yb"
+
+[resource]
+script = ExtResource("9_6devi")
+name = "FPM"
+action_containers = Array[ExtResource("1_cc0mn")]([SubResource("Resource_728ov"), SubResource("Resource_t1n65"), SubResource("Resource_48743"), SubResource("Resource_upovw"), SubResource("Resource_8220e"), SubResource("Resource_y202a")])
+metadata/_custom_type_script = "uid://dxf7fy688y1i4"

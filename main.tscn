@@ -1,12 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://bef0oepgnwyc7"]
+[gd_scene load_steps=16 format=3 uid="uid://bef0oepgnwyc7"]
 
-[ext_resource type="PackedScene" uid="uid://neeqd7yonalw" path="res://Prefabs/TreeLog.tscn" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://bli1shihd2psw" path="res://Scripts/Manager.gd" id="1_lquwl"]
-[ext_resource type="PackedScene" uid="uid://2myuylmvmhen" path="res://Prefabs/Player.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://f5brsjc3k43b" path="res://Dummy/Dummy.tscn" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://d3tkn72avp4nj" path="res://Prefabs/enemy.tscn" id="4_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://bjvg5g618v8v4" path="res://Assets/crosshair.png" id="4_7mycd"]
-[ext_resource type="Script" uid="uid://cv727qevddc8o" path="res://Scripts/VFXManager.gd" id="5_272bh"]
+[ext_resource type="PackedScene" uid="uid://neeqd7yonalw" path="res://TreeLog.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://2myuylmvmhen" path="res://Characters/Player/Player.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://f5brsjc3k43b" path="res://Characters/Enemies/Dummy/Dummy.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://d3tkn72avp4nj" path="res://Characters/Enemies/enemy.tscn" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://bjvg5g618v8v4" path="res://Systems/UI/Crosshair/crosshair.png" id="4_7mycd"]
+[ext_resource type="PackedScene" uid="uid://d0e0uubn8dq75" path="res://Abilities/AbilityContainer.tscn" id="5_5vw27"]
+[ext_resource type="Script" uid="uid://cv727qevddc8o" path="res://Systems/Managers/AbilityManager.gd" id="5_272bh"]
+
+[sub_resource type="GDScript" id="GDScript_7mycd"]
+script/source = "class_name NManager extends Node3D
+"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_top_color = Color(0.414168, 0.717048, 0.875941, 1)
@@ -57,7 +61,7 @@ func _process(delta: float) -> void:
 "
 
 [node name="Main" type="Node3D"]
-script = ExtResource("1_lquwl")
+script = SubResource("GDScript_7mycd")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0xm2m")
@@ -155,6 +159,7 @@ script = SubResource("GDScript_1bvp3")
 [node name="AbilityManager" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.28563, -5.96046e-08, 0.794425)
 script = ExtResource("5_272bh")
+PREFAB = ExtResource("5_5vw27")
 raycast_collision_mask = 1
 
 [node name="Dummy" parent="." instance=ExtResource("2_h2yge")]

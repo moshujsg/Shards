@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="RComboAbility" load_steps=6 format=3 uid="uid://dmyjpsya3wsp1"]
+
+[ext_resource type="Script" uid="uid://b0m8k5fpdfw7n" path="res://Abilities/AbilityData.gd" id="1_fyg3c"]
+[ext_resource type="Animation" uid="uid://fi3wdcise6i7" path="res://Characters/Player/Animations/AttackSword_02.res" id="1_mdy2f"]
+[ext_resource type="Resource" uid="uid://tqij44h7k18x" path="res://Systems/Input/InputActions/Attack.tres" id="2_5amm8"]
+[ext_resource type="Script" uid="uid://ry2r7owg3mp0" path="res://Abilities/ComboAbility.gd" id="4_ee2aj"]
+
+[sub_resource type="Resource" id="Resource_b62f0"]
+script = ExtResource("1_fyg3c")
+vfx_animation_name = ""
+use_global_space = false
+cast_range = 15.0
+lifetime = 1.0
+type = 0
+damage = 0
+metadata/_custom_type_script = "uid://b0m8k5fpdfw7n"
+
+[resource]
+script = ExtResource("4_ee2aj")
+input_action = ExtResource("2_5amm8")
+animation_name = "Player/AttackSword_02"
+animation = ExtResource("1_mdy2f")
+next_attacks = Array[ExtResource("4_ee2aj")]([])
+combo_window = 0.5
+cancelable = false
+ability_data = SubResource("Resource_b62f0")
+metadata/_custom_type_script = "uid://ry2r7owg3mp0"

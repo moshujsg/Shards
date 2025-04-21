@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0e0uubn8dq75"]
+
+[ext_resource type="Script" uid="uid://cd16o4o0hl2rx" path="res://Abilities/VisualEffect.gd" id="1_2148d"]
+
+[node name="AbilityEntity" type="Node3D"]
+script = ExtResource("1_2148d")
+effect_area_mask = 2

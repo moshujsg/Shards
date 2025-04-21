@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="InputAction" load_steps=2 format=3 uid="uid://tqij44h7k18x"]
-
-[ext_resource type="Script" uid="uid://b0b5cfu7c7dan" path="res://Addons/GodotEnhancedInputSystem/Classes/InputAction.gd" id="1_sq8nl"]
-
-[resource]
-script = ExtResource("1_sq8nl")
-name = "Attack"
-description = ""
-metadata/_custom_type_script = "uid://b0b5cfu7c7dan"

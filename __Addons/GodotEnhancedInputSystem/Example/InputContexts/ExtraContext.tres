@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InputMappingContext" load_steps=3 format=3 uid="uid://bdyv38rsy0ksa"]
+
+[ext_resource type="Script" uid="uid://ba7pjrfkdn0yb" path="res://__Addons/GodotEnhancedInputSystem/Classes/InputActionContainer.gd" id="1_mckvj"]
+[ext_resource type="Script" uid="uid://dxf7fy688y1i4" path="res://__Addons/GodotEnhancedInputSystem/Classes/InputMappingContext.gd" id="5_jf2go"]
+
+[resource]
+script = ExtResource("5_jf2go")
+name = ""
+action_containers = Array[ExtResource("1_mckvj")]([])
+metadata/_custom_type_script = "uid://dxf7fy688y1i4"
