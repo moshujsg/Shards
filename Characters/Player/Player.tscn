@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://b6kmn7ys0sakr" path="res://Characters/Player/player.gd" id="1_xhfnw"]
 [ext_resource type="PackedScene" uid="uid://dtb5i5vpvma8n" path="res://Characters/Player/Model/Player_v1.glb" id="2_kpjcp"]
 [ext_resource type="Script" uid="uid://doki0ewnavaov" path="res://Characters/Player/camera.gd" id="4_cxr5p"]
-[ext_resource type="Shader" uid="uid://bpbgyh18pyum0" path="res://pixelart_stylized.gdshader" id="5_tdg3f"]
 [ext_resource type="Script" uid="uid://g2lyslguq5h1" path="res://Characters/Player/PlayerController.gd" id="6_tdg3f"]
 [ext_resource type="Resource" uid="uid://d1im72y63x88v" path="res://Systems/Input/InputActions/MoveUp.tres" id="7_dtqjt"]
 [ext_resource type="Script" uid="uid://mwqvmq22h2f7" path="res://Characters/SharedComponents/AttackComponent.gd" id="7_fd4tb"]
@@ -538,15 +537,30 @@ size = Vector3(0, 0, 0)
 flip_faces = true
 size = Vector2(2, 2)
 
+[sub_resource type="Shader" id="Shader_xqos4"]
+code = "shader_type spatial;
+render_mode unshaded;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
+uniform float pixel_size = 2.0;
+
+void vertex() {
+	POSITION = vec4(VERTEX.xy, 1.0, 1.0);
+}
+
+void fragment() {
+    vec2 tex_size = vec2(textureSize(SCREEN_TEXTURE, 0)); // Get actual texture size
+    vec2 steps = tex_size / pixel_size; // Number of \"blocks\" per dimension
+
+    vec2 quantized_uv = floor(SCREEN_UV * steps) / steps;
+
+    ALBEDO = texture(SCREEN_TEXTURE, quantized_uv).rgb;
+
+}"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cxr5p"]
 render_priority = 0
-shader = ExtResource("5_tdg3f")
-shader_parameter/shadows_enabled = true
-shader_parameter/highlights_enabled = true
-shader_parameter/shadow_strength = 0.4
-shader_parameter/highlight_strength = 0.1
-shader_parameter/highlight_color = Color(1, 1, 1, 1)
-shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader = SubResource("Shader_xqos4")
+shader_parameter/pixel_size = 2.0
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("animation_tree", "animation_player", "pivot", "camera_3d", "player_controller", "attack_component", "move_component")]
 collision_layer = 2
@@ -607,8 +621,6 @@ near = 0.001
 script = ExtResource("4_cxr5p")
 
 [node name="Postprocess" type="MeshInstance3D" parent="Pivot/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, -0.844)
-visible = false
 extra_cull_margin = 16384.0
 ignore_occlusion_culling = true
 mesh = SubResource("QuadMesh_dtqjt")

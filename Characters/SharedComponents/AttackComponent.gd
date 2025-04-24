@@ -64,7 +64,6 @@ func get_next_ability(p_action: InputAction) -> RComboAbility:
 		return current_step.get_next_attack(p_action)
 
 func use_ability(p_ability: RComboAbility) -> RAbilityEventData:
-	current_step = p_ability
 	timer.stop()
 	current_step = p_ability
 	return RAbilityEventData.new(

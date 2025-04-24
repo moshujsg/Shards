@@ -303,7 +303,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_h2tqj")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." node_paths=PackedStringArray("attack_component")]
+[node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_80imi")
 anim_player = NodePath("../AnimationPlayer")
 parameters/AttackAdd/add_amount = 0.0
@@ -322,7 +322,6 @@ parameters/OneShot/active = false
 parameters/OneShot/internal_active = false
 parameters/OneShot/request = 0
 script = ExtResource("3_30yes")
-attack_component = NodePath("../CAttackComponent")
 
 [node name="AttackArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.833088, 0.887903)
