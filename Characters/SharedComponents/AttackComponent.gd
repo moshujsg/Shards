@@ -1,17 +1,21 @@
 class_name CAttackComponent extends Component
 
-signal ability_used(ability: RComboAbility)
-
 @export var attack_area: Area3D
 @export_flags_3d_physics var attack_area_layer : int
 @export_flags_3d_physics var attack_area_mask : int
 @export var own_body: NCharacter
 @export var aim_component : CAim
 var timer : Timer
-@export var abilities : Dictionary[InputAction, RComboAbility]
-var current_step : RComboAbility
+@export var abilities : Dictionary[InputAction, RComboNode] # Just for loading RComboAbiliyy as you can't export objects
+var current_step : AbilityWrapper
+var _abilities : Dictionary[InputAction, AbilityWrapper] # Actual map to use, with wrapper to uniquely identify each object
+
+func wrap_ablities() -> void:
+	for action in abilities:
+		_abilities[action] = AbilityWrapper.new(abilities.get(action) as RComboNode)
 
 func _ready() -> void:
+	wrap_ablities()
 	timer = Timer.new()
 	add_child(timer)
 	timer.one_shot = true
@@ -26,7 +30,7 @@ func start_timer() -> void:
 	if not current_step:
 		return
 	#print("Combo window opened")
-	timer.start(current_step.combo_window)
+	timer.start(current_step.combo_data.combo_window)
 
 func _on_timer_timeout() -> void:
 	#print("Combo window closed")
@@ -43,30 +47,22 @@ func cast_attack(p_body: Node3D) -> void:
 func is_new_combo(p_action: InputAction) -> bool:
 	if not current_step:
 		return true
-	for next_attack in current_step.next_attacks:
+	for next_attack in current_step.combo_data.next_attacks:
 		if next_attack.input_action == p_action:
 			return false
 	return true
 
-func is_valid_aim_target(target: Dictionary) -> bool:
-	# For now only AOE needs a cast target (ground or enemy)
-	return !target.is_empty()
-
 func get_character_animation() -> String:
-	return current_step.animation_name
+	return current_step.combo_data.ability_data.animation_name
 
-func get_next_ability(p_action: InputAction) -> RComboAbility:
-	if not abilities.has(p_action) and (not current_step or current_step.has_next_attack(p_action)):
+func get_next_ability(p_action: InputAction) -> AbilityWrapper:
+	if not _abilities.has(p_action) and (not current_step or current_step.has_next_attack(p_action)):
 		return null
 	if is_new_combo(p_action):
-		return abilities.get(p_action)
+		return _abilities.get(p_action)
 	else:
 		return current_step.get_next_attack(p_action)
 
-func use_ability(p_ability: RComboAbility) -> RAbilityEventData:
+func use_ability(p_ability: AbilityWrapper) -> void:
 	timer.stop()
 	current_step = p_ability
-	return RAbilityEventData.new(
-			p_ability.ability_data,
-			own_body
-			)

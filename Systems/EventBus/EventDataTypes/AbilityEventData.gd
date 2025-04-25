@@ -1,9 +1,10 @@
 class_name RAbilityEventData extends REventData
 
-var ability_data : RAbilityData
+var ability : AbilityWrapper
 var owner : NCharacter
-var spawn_position : Vector3
+var target_position_callable : Callable
 
-func _init(p_ability_data: RAbilityData, p_owner: NCharacter) -> void:
-	ability_data = p_ability_data
+func _init(p_ability: AbilityWrapper, p_owner: NCharacter, p_target_position_callable: Callable) -> void:
+	ability = p_ability
 	owner = p_owner
+	target_position_callable = p_target_position_callable

@@ -4,19 +4,15 @@ signal attack_animation_finished
 
 var playback : AnimationNodeStateMachinePlayback = get("parameters/StateMachine/playback")
 var attack_node : AnimationNodeAnimation 
-var is_playing_animation : bool:
-	set(value) :
-		if value == true:
-			pass
-		is_playing_animation = value
-var flag : bool
+var is_playing_animation : bool
+var vfx_lambda : Callable = Callable() # Hold the eventbus data to trigger the vfx when the animation reaches the trigger point
 @onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
 
 func _ready() -> void:
 	attack_node = ((tree_root as AnimationNodeBlendTree).get_node("Attack") as AnimationNodeAnimation)
 
-func _on_ability_used(ability: RComboAbility) -> void:
-	play_attack_animation(ability.animation_name)
+func _on_ability_used(ability: RComboNode) -> void:
+	play_attack_animation(ability.ability_data.animation_name)
 
 func is_playing() -> bool:
 	return is_playing_animation
@@ -29,6 +25,11 @@ func play_attack_animation(p_animation_name: String) -> void:
 	advance(0.0)
 	is_playing_animation = true
 
+func vfx_trigger() -> void:
+	if vfx_lambda == Callable():
+		return
+	vfx_lambda.call()
+	vfx_lambda = Callable()
 func _physics_process(delta: float) -> void:
 	var node_playing := get("parameters/AttackOneShot/active") as bool
 	if is_playing_animation and not node_playing:

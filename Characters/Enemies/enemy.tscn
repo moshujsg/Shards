@@ -333,8 +333,9 @@ disabled = true
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0281, 0.496006)
 
-[node name="CAim" type="Node" parent="."]
+[node name="CAim" type="Node" parent="." node_paths=PackedStringArray("base_node")]
 script = ExtResource("4_80imi")
+base_node = NodePath("..")
 
 [node name="CHealth" type="Node" parent="." node_paths=PackedStringArray("body")]
 script = ExtResource("3_t4g6b")

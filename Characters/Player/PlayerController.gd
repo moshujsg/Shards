@@ -32,6 +32,13 @@ const TURN_SPEED = 10
 @export var aim_component : CAim
 var move_input : Vector2
 
+
+enum AbilityCastResult {
+	NONE,
+	CANCELLED,
+	SUCCESSFUL
+}
+
 func _ready() -> void:
 	#super._ready()
 	push_mapping_context(base_context)
@@ -54,30 +61,70 @@ func _ready() -> void:
 	bind_action(ia_capture_cursor, InputActionProperties.TriggerPhase.TRIGGERED, capture_cursor)
 	
 	# Combat
-	bind_action(ia_attack, InputActionProperties.TriggerPhase.TRIGGERED, cast_ability.bind(ia_attack))
-	bind_action(ia_ability_slot_1, InputActionProperties.TriggerPhase.TRIGGERED, cast_ability.bind(ia_ability_slot_1))
+	bind_action(ia_attack, InputActionProperties.TriggerPhase.TRIGGERED, on_ability_action_received.bind(ia_attack))
+	bind_action(ia_ability_slot_1, InputActionProperties.TriggerPhase.STARTED, on_ability_action_received.bind(ia_ability_slot_1))
+	bind_action(ia_ability_slot_1, InputActionProperties.TriggerPhase.COMPLETED, on_ability_action_received.bind(ia_ability_slot_1))
 
-func cast_ability(p_object: InputObject, p_action: InputAction) -> void:
+func on_ability_action_received(p_object: InputObject, p_action: InputAction) -> void:
 	if animation_component.is_playing():
 		return
-	var ability := attack_component.get_next_ability(p_action)
+	var ability_wrapper := attack_component.get_next_ability(p_action)
+	print(ability_wrapper.get_instance_id())
+	var cast_result := AbilityCastResult.NONE
+	match p_object.phase:
+		InputActionProperties.TriggerPhase.STARTED:
+			preview_ability(ability_wrapper)
+		InputActionProperties.TriggerPhase.TRIGGERED:
+			cast_result = try_cast_ability(ability_wrapper)
+		InputActionProperties.TriggerPhase.COMPLETED:
+			cast_result = try_cast_ability(ability_wrapper)
 
-	# Check if target is a valid aim target
-	var target_position := Vector3.ZERO
-	if ability.ability_data.needs_target():
-		var target : Dictionary = aim_component.cast_ray(ability.ability_data.cast_range)
-		if not attack_component.is_valid_aim_target(target):
-			return
-		target_position = target["position"] as Vector3
-
-	# confirm use of ability and get event data
-	var ability_event_data : RAbilityEventData = attack_component.use_ability(ability)
-	ability_event_data.spawn_position = target_position
+func preview_ability(p_ability_wrapper: AbilityWrapper) -> void:
 	EventBus.broadcast(
-		"ability_used",
-		ability_event_data
+		"ability_preview",
+		RAbilityEventData.new(
+			p_ability_wrapper,
+			player,
+			aim_component.get_target_global_position
+			)
 	)
-	animation_component.play_attack_animation(attack_component.get_character_animation())
+
+func is_valid_cast_target(p_ability: RComboNode) -> bool:
+	if p_ability.ability_data.needs_target():
+		if not aim_component.has_target() or\
+			not p_ability.ability_data.is_target_in_range(
+				player.global_position,
+				aim_component.get_target_global_position()
+				):
+			return false
+	return true
+
+func try_cast_ability(p_ability_wrapper: AbilityWrapper) -> AbilityCastResult:
+	var event_data := RAbilityEventData.new(
+				p_ability_wrapper,
+				player,
+				aim_component.get_target_global_position
+				)
+	# Check if target is a valid aim target
+	if not is_valid_cast_target(p_ability_wrapper.combo_data):
+		EventBus.broadcast(
+			"ability_cancelled",
+				event_data
+			)
+		return AbilityCastResult.CANCELLED
+	# confirm use of ability and get event data
+	attack_component.use_ability(p_ability_wrapper)
+
+	# Lambda to get called to sync animation and vfx spawn
+	animation_component.vfx_lambda = func () -> void:
+		EventBus.broadcast(
+			"ability_used",
+			event_data
+		)
+	
+	animation_component.play_attack_animation(p_ability_wrapper.combo_data.ability_data.animation_name)
+	return AbilityCastResult.SUCCESSFUL
+
 
 func capture_cursor(p_action: InputObject) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

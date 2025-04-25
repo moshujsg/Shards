@@ -1,1 +1,1 @@
-class_name REventData extends Resource
+class_name REventData extends Object

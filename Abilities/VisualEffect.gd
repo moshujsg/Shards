@@ -1,5 +1,10 @@
 class_name NAbility extends Node3D
 
+enum AbilityExecutionType {
+	PREVIEW,
+	EXECUTE
+}
+
 @export_flags_3d_physics var effect_area_layer : int 
 @export_flags_3d_physics var effect_area_mask : int
 @export var animation_player: AnimationPlayer
@@ -7,17 +12,21 @@ class_name NAbility extends Node3D
 var ability_data: RAbilityData
 var damage_area : Area3D
 
-func _ready() -> void:
-	if not animation_player:
-		return
-	animation_player.play("default_animation")
-	await animation_player.animation_finished
-	queue_free()
-
-func setup(p_ability_data: RAbilityData) -> void:
+func load_data(p_ability_data: RAbilityData) -> void:
 	ability_data = p_ability_data
 	vfx = ability_data.visual_effect_scene.instantiate()
 	add_child(vfx)
+
+func run(p_execution_type: AbilityExecutionType) -> void:
+	var as_preview := p_execution_type == AbilityExecutionType.PREVIEW
+	damage_area.monitoring = as_preview
+	animation_player.play("preview" if as_preview else "default")
+	if as_preview:
+		return
+	await animation_player.animation_finished
+	queue_free()
+
+func setup() -> void:
 	animation_player = vfx.get_node_or_null("AnimationPlayer")
 	damage_area = vfx.get_node_or_null("Area3D")
 	damage_area.collision_layer = effect_area_layer

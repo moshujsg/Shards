@@ -27,7 +27,7 @@
 [ext_resource type="Resource" uid="uid://tqij44h7k18x" path="res://Systems/Input/InputActions/Attack.tres" id="25_406my"]
 [ext_resource type="Script" uid="uid://b0b5cfu7c7dan" path="res://__Addons/GodotEnhancedInputSystem/Classes/InputAction.gd" id="26_406my"]
 [ext_resource type="Resource" uid="uid://cdee3cbgrq4gg" path="res://Systems/Input/MappingContexts/VisibleCursorContext.tres" id="26_gy83n"]
-[ext_resource type="Script" uid="uid://ry2r7owg3mp0" path="res://Abilities/ComboAbility.gd" id="28_2ywdf"]
+[ext_resource type="Script" uid="uid://ry2r7owg3mp0" path="res://Abilities/ComboNode.gd" id="28_2ywdf"]
 [ext_resource type="Resource" uid="uid://74ceqco7ko5c" path="res://Systems/Input/MappingContexts/CombatContext.tres" id="28_fd4tb"]
 [ext_resource type="Resource" uid="uid://dtn1ypsx6wnmd" path="res://Abilities/ComboAttacks/Light1.tres" id="29_3b1fg"]
 [ext_resource type="Resource" uid="uid://dbthqhadk3ymf" path="res://Abilities/ComboAttacks/Tornado.tres" id="30_k7qm6"]
@@ -139,7 +139,6 @@ states/Start/position = Vector2(199, 100)
 transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_700hf"), "RESET", "Player_A_HandCast_1", SubResource("AnimationNodeStateMachineTransition_605ro"), "Player_A_HandCast_1", "RESET", SubResource("AnimationNodeStateMachineTransition_mghi7"), "RESET", "Player_Blub", SubResource("AnimationNodeStateMachineTransition_dik4f"), "Player_Blub", "RESET", SubResource("AnimationNodeStateMachineTransition_fd7od")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_fdj0h"]
-graph_offset = Vector2(-885.35, -82.5111)
 nodes/Attack/node = SubResource("AnimationNodeAnimation_fd4tb")
 nodes/Attack/position = Vector2(-1340, 240)
 nodes/AttackAdd/node = SubResource("AnimationNodeAdd2_gy83n")
@@ -629,7 +628,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_cxr5p")
 [node name="Aim" type="Node" parent="." node_paths=PackedStringArray("base_node")]
 script = ExtResource("32_k7qm6")
 raycast_collision_mask = 3
-debug_raycast = true
 base_node = NodePath("../Pivot/Camera3D")
 
 [node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("player", "camera", "pivot", "attack_component", "move_component", "animation_component", "aim_component")]

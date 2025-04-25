@@ -3,7 +3,7 @@
 [ext_resource type="Animation" uid="uid://bnx4gk7ruismj" path="res://Characters/Player/Animations/AttackSword_01.res" id="1_fs8gp"]
 [ext_resource type="Script" uid="uid://b0m8k5fpdfw7n" path="res://Abilities/AbilityData.gd" id="1_sfdjf"]
 [ext_resource type="Resource" uid="uid://tqij44h7k18x" path="res://Systems/Input/InputActions/Attack.tres" id="2_ewpg3"]
-[ext_resource type="Script" uid="uid://ry2r7owg3mp0" path="res://Abilities/ComboAbility.gd" id="4_b1vpq"]
+[ext_resource type="Script" uid="uid://ry2r7owg3mp0" path="res://Abilities/ComboNode.gd" id="4_b1vpq"]
 [ext_resource type="Resource" uid="uid://dmyjpsya3wsp1" path="res://Abilities/ComboAttacks/Light2.tres" id="4_ewpg3"]
 
 [sub_resource type="Resource" id="Resource_hy3wr"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://r5xhk5ydy43y"]
+[gd_scene load_steps=22 format=4 uid="uid://r5xhk5ydy43y"]
 
 [ext_resource type="Texture2D" uid="uid://c7vphivnohxek" path="res://Abilities/Tornado/Tornado_T_Tornado.png" id="1_sxnpw"]
 [ext_resource type="Animation" uid="uid://bbd2rid0qdmge" path="res://Abilities/Tornado/TornadoRotation.res" id="2_hlvcc"]
@@ -278,10 +278,68 @@ tracks/1/keys = {
 "values": [Vector3(1.17188, 1.05767, 1.23708)]
 }
 
+[sub_resource type="Animation" id="Animation_sxnpw"]
+resource_name = "preview"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton3D:Bone")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.0333333, 1, 0, 0, 0, 1, 0.0666667, 1, 0, 0.0400947, 0, 0.999196, 1.03333, 1, 0, 0.999799, 0, -0.0200514, 1.06667, 1, 0, -0.997298, 0, 0.0734605, 1.96667, 1, 0, -0.0534485, 0, 0.998571, 2, 1, 0, 8.74228e-08, 0, 1)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton3D:Bone.001")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.0333333, 1, 0, 0, 0, 1, 0.0666667, 1, 0, 0.0400947, 0, 0.999196, 1.03333, 1, 0, 0.999799, 0, -0.0200514, 1.06667, 1, 0, -0.997298, 0, 0.0734605, 1.96667, 1, 0, -0.0534485, 0, 0.998571, 2, 1, 0, 8.74228e-08, 0, 1)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton3D:Bone.002")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.0333333, 1, 0, 0, 0, 1, 0.0666667, 1, 0, 0.0400947, 0, 0.999196, 1.03333, 1, 0, 0.999799, 0, -0.0200514, 1.06667, 1, 0, -0.997298, 0, 0.0734606, 1.96667, 1, 0, -0.0534485, 0, 0.998571, 2, 1, 0, 8.74228e-08, 0, 1)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton3D:Bone.003")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.0333333, 1, 0, 0, 0, 1, 0.0666667, 1, 0, 0.0400947, 0, 0.999196, 1.03333, 1, 0, 0.999799, 0, -0.0200514, 1.06667, 1, 0, -0.997298, 0, 0.0734605, 1.96667, 1, 0, -0.0534485, 0, 0.998571, 2, 1, 0, 8.74228e-08, 0, 1)
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Area3D/CollisionShape3D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.3194, 2.0168, 2.45502)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Area3D/CollisionShape3D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qnvsj"]
 _data = {
 &"RESET": SubResource("Animation_jkqax"),
-&"default_animation": ExtResource("2_hlvcc")
+&"default": ExtResource("2_hlvcc"),
+&"preview": SubResource("Animation_sxnpw")
 }
 
 [node name="vfx" type="Node3D"]
@@ -293,28 +351,28 @@ bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 bones/0/enabled = true
 bones/0/position = Vector3(0, 0, 0)
-bones/0/rotation = Quaternion(0, 0.780639, 0, 0.624982)
+bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.001"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13587, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(0, 0.13587, 0)
-bones/1/rotation = Quaternion(0, 0.780639, 0, 0.624982)
+bones/1/rotation = Quaternion(0, 0, 0, 1)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Bone.002"
 bones/2/parent = 1
 bones/2/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.163043, 0)
 bones/2/enabled = true
 bones/2/position = Vector3(0, 0.163043, 0)
-bones/2/rotation = Quaternion(0, 0.780639, 0, 0.624982)
+bones/2/rotation = Quaternion(0, 0, 0, 1)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "Bone.003"
 bones/3/parent = 2
 bones/3/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.190217, 0)
 bones/3/enabled = true
 bones/3/position = Vector3(0, 0.190217, 0)
-bones/3/rotation = Quaternion(0, 0.780639, 0, 0.624982)
+bones/3/rotation = Quaternion(0, 0, 0, 1)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "Bone.004"
 bones/4/parent = 3
@@ -374,7 +432,7 @@ bones/11/rotation = Quaternion(0, 0, 0, 1)
 bones/11/scale = Vector3(0.869565, 0.869565, 0.869565)
 
 [node name="Circle_003" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(6.4572, 0, 7.848, 0, 10.163, 0, -7.848, 0, 6.4572, 8.02932e-09, 0.733695, -1.26904e-08)
+transform = Transform3D(10.163, 0, 0, 0, 10.163, 0, 0, 0, 10.163, 1.49012e-08, 0.733695, -1.86265e-09)
 bone_name = "Circle.003"
 bone_idx = 5
 
@@ -383,7 +441,7 @@ mesh = SubResource("ArrayMesh_2f11o")
 skeleton = NodePath("")
 
 [node name="Circle_002" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(4.34534, 0, 5.28126, 0, 6.83913, 0, -5.28126, 0, 4.34534, -8.98971e-11, 0.48913, -7.39659e-11)
+transform = Transform3D(6.83913, 0, 0, 0, 6.83913, 0, 0, 0, 6.83913, 0, 0.48913, -1.16415e-10)
 bone_name = "Circle.002"
 bone_idx = 6
 
@@ -392,7 +450,7 @@ mesh = SubResource("ArrayMesh_d4cm5")
 skeleton = NodePath("")
 
 [node name="Circle_006" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(4.34534, 0, 5.28126, 0, 6.83913, 0, -5.28126, 0, 4.34534, -0.0378221, 0.652174, -0.0317525)
+transform = Transform3D(6.83913, 0, 0, 0, 6.83913, 0, 0, 0, 6.83913, 0.000488907, 0.652174, -0.0493811)
 bone_name = "Circle.006"
 bone_idx = 7
 
@@ -401,7 +459,7 @@ mesh = SubResource("ArrayMesh_7rooe")
 skeleton = NodePath("")
 
 [node name="Circle_001" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(3.23274, 0, -4.15044, 0, 5.26087, 0, 4.15044, 0, 3.23274, 2.93898e-09, 0.298913, -2.28915e-09)
+transform = Transform3D(5.26087, 0, 0, 0, 5.26087, 0, 0, 0, 5.26087, 0, 0.298913, -3.72529e-09)
 bone_name = "Circle.001"
 bone_idx = 8
 
@@ -410,7 +468,7 @@ mesh = SubResource("ArrayMesh_jynw0")
 skeleton = NodePath("")
 
 [node name="Circle" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(-0.393156, 0, -0.185647, 0, 0.434783, 0, 0.185647, 0, -0.393156, 0, 0.13587, 0)
+transform = Transform3D(0.434783, 0, 0, 0, 0.434783, 0, 0, 0, 0.434783, 0, 0.13587, 0)
 bone_name = "Circle"
 bone_idx = 9
 
@@ -419,7 +477,7 @@ mesh = SubResource("ArrayMesh_7tf6o")
 skeleton = NodePath("")
 
 [node name="Circle_005" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(0.180019, 0, -0.395764, 0, 0.434783, 0, 0.395764, 0, 0.180019, -0.0362831, 0.217392, -0.0385816)
+transform = Transform3D(0.00620267, 0, 0.434739, 0, 0.434783, 0, -0.434739, 0, 0.00620267, 0.0163354, 0.217392, 0.0503801)
 bone_name = "Circle.005"
 bone_idx = 10
 
@@ -428,7 +486,7 @@ mesh = SubResource("ArrayMesh_6loxa")
 skeleton = NodePath("")
 
 [node name="Circle_004" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(-0.190256, 0, 0.848496, 0, 0.869565, 0, -0.848496, 0, -0.190256, 0, 0, 0)
+transform = Transform3D(0.869565, 0, 0, 0, 0.869565, 0, 0, 0, 0.869565, 0, 0, 0)
 bone_name = "Circle.004"
 bone_idx = 11
 

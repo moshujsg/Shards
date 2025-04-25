@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b0m8k5fpdfw7n" path="res://Abilities/AbilityData.gd" id="1_fyg3c"]
 [ext_resource type="Animation" uid="uid://fi3wdcise6i7" path="res://Characters/Player/Animations/AttackSword_02.res" id="1_mdy2f"]
 [ext_resource type="Resource" uid="uid://tqij44h7k18x" path="res://Systems/Input/InputActions/Attack.tres" id="2_5amm8"]
-[ext_resource type="Script" uid="uid://ry2r7owg3mp0" path="res://Abilities/ComboAbility.gd" id="4_ee2aj"]
+[ext_resource type="Script" uid="uid://ry2r7owg3mp0" path="res://Abilities/ComboNode.gd" id="4_ee2aj"]
 
 [sub_resource type="Resource" id="Resource_b62f0"]
 script = ExtResource("1_fyg3c")
