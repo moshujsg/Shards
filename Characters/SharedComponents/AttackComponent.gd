@@ -1,5 +1,6 @@
 class_name CAttackComponent extends Component
 
+@export var animation_tree: CAnimationTree
 @export var attack_area: Area3D
 @export_flags_3d_physics var attack_area_layer : int
 @export_flags_3d_physics var attack_area_mask : int
@@ -22,6 +23,10 @@ func _ready() -> void:
 	timer.autostart = false
 	timer.timeout.connect(_on_timer_timeout)
 	attack_area.body_entered.connect(cast_attack)
+
+	#TODO REMOVE THIS BITCH DEPENDENCY
+	if animation_tree:
+		animation_tree.attack_animation_finished.connect(start_timer)
 	#attack_area.collision_mask = attack_area_mask
 	#attack_area.collision_layer = attack_area_layer
 
