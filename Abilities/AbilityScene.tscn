@@ -1,7 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0e0uubn8dq75"]
+[gd_scene load_steps=4 format=3 uid="uid://d0e0uubn8dq75"]
 
 [ext_resource type="Script" uid="uid://cd16o4o0hl2rx" path="res://Abilities/VisualEffect.gd" id="1_2148d"]
+[ext_resource type="Shader" uid="uid://db0ltkma1hpy8" path="res://Abilities/PreviewShader.gdshader" id="2_j8bfb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eb8si"]
+render_priority = 1
+shader = ExtResource("2_j8bfb")
+shader_parameter/color1 = Color(0.16, 0.678, 1, 0.101961)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/threshold = 0.2
+shader_parameter/fresnel_sharpness = 1.0
 
 [node name="AbilityEntity" type="Node3D"]
 script = ExtResource("1_2148d")
 effect_area_mask = 2
+preview_material = SubResource("ShaderMaterial_eb8si")

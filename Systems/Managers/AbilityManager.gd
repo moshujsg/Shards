@@ -42,14 +42,15 @@ func spawn_ability(p_event_data: RAbilityEventData, p_execution_type: NAbility.A
 		push_error("Tried to spawn ability but visual_effect_scene is null")
 		return
 	var prefab := PREFAB.instantiate() as NAbility
+	add_child(prefab)
 	prefab.load_data(p_event_data.ability.combo_data.ability_data)
 	prefab.setup()
-	add_child(prefab)
 	prefab.run(p_execution_type)
 	var target_pos := p_event_data.target_position_callable.call() as Vector3
 	if target_pos == Vector3.INF:
 		target_pos = Vector3.ZERO
 	prefab.global_position = find_ground_from_position(target_pos)
+	print(find_ground_from_position(target_pos))
 	return prefab
 
 func find_ground_from_position(p_position: Vector3) -> Vector3:

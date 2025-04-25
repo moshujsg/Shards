@@ -7,6 +7,7 @@ enum AbilityExecutionType {
 
 @export_flags_3d_physics var effect_area_layer : int 
 @export_flags_3d_physics var effect_area_mask : int
+@export var preview_material : ShaderMaterial
 @export var animation_player: AnimationPlayer
 @export var vfx : Node3D
 var ability_data: RAbilityData
@@ -22,9 +23,17 @@ func run(p_execution_type: AbilityExecutionType) -> void:
 	damage_area.monitoring = as_preview
 	animation_player.play("preview" if as_preview else "default")
 	if as_preview:
+		apply_preview_material()
 		return
 	await animation_player.animation_finished
 	queue_free()
+
+func apply_preview_material() -> void:
+	var meshes := vfx.find_children('','MeshInstance3D')
+	for mesh : MeshInstance3D in meshes:
+		mesh.material_override = preview_material
+		#for surface in mesh.get_surface_override_material_count():
+			#mesh.set_surface_override_material(surface, preview_material)
 
 func setup() -> void:
 	animation_player = vfx.get_node_or_null("AnimationPlayer")
